@@ -1,4 +1,4 @@
-package com.example.modid.proxy;
+package com.qsteam.allfrommodern.proxy;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
