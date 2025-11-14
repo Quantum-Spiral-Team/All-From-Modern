@@ -69,5 +69,6 @@ dependencies {
     compileOnly rfg.deobf("curse.maven:jei-238222:5846804")
     runtimeOnly "curse.maven:had-enough-items-557549:7178243"
     implementation rfg.deobf("curse.maven:groovyscript-687577:7092147")
+    implementation rfg.deobf("curse.maven:nether-api-1306115:7216794")
 
 }
