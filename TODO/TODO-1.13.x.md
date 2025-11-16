@@ -1,5 +1,6 @@
 # 1.13.x
 ## 1.13
+### Additions
 - [ ] - Blocks
     - [ ] - Blue ice
     - [ ] - Bubble columns (magma and soul sand underwater)
@@ -235,6 +236,261 @@
     > * All of the blocks that water can be placed in now have the block state `waterlogged`.
     > * Blocks such as bubble column or kelp will always count as a water source.
     > * When water spreads and would later turn into a source block, it now immediately just places a source block.
+### Changes
+- [ ] - Blocks
+    - [ ] - General
+        - [ ] - Blocks which used to have no bottom texture (like repeaters, comparators, etc.) now have a bottom texture, not including redstone wire.
+        - [ ] -Blocks with a collision box now have matching bounding boxes.
+            > * Affected: anvils, cauldrons, hoppers, fences, iron bars, glass panes, filled end portal frames, vines, lily pads, stairs, brewing stands, and pistons.
+            > * Updated the collision box of anvils and hoppers.
+            > * Does not affect blocks with a collision box smaller than their model, such as soul sand and snow layers.
+    - [ ] - Beacons
+        - [ ] - Added new sounds.
+    - [ ] - Beds
+        - [ ] - Changed message shown when failing to use a bed to say "You can sleep only at night and during thunderstorms."
+    - [ ] - Cactus
+        - [ ] - Now break if signs or banners are placed directly next to them.
+            > Previously, these blocks couldn't be placed like this.
+    - [ ] - Chests and trapped chests
+        - [ ] - They can be put directly next to their double variants instead of requiring one block between them.
+            > Shift right-clicking a chest or trapped chest will only make it try to connect to the clicked chest or trapped chest if possible, else it'll become a single chest or trapped chest.
+    - [ ] - Dispensers
+        > Crafting no longer requires a fully repaired bow.
+    - [ ] - Ender Chests
+        > Will now change their texture when the computer time is set to the 24th to 26th of December to suit Christmas.
+    - [ ] - Fence gates
+        > Placing them no longer requires a block below them.
+    - [ ] - Leaves
+        - [ ] - Naturally-generated leaves now survive at a distance of up to 6 blocks from logs, instead of 4.
+            > The block state for leaves changed from a `check_decay` and `decayable` Booleans to distance (ranging from 1 to 7) and a `persistent` Boolean.
+    - [ ] - Levers
+        > Flicking a lever on now displays redstone particles.
+    - [ ] - Magma blocks
+        > Now generate at the bottom of ocean ravines, creating downward bubble columns.
+    - [ ] - Monster eggs (Infected blocks)
+        > They will now break instantly, no matter the tool.
+        >> When broken with Silk Touch, the non-infested counterpart of the block will drop.
+    - [ ] - Packed ice
+        > Now can be crafted from 9 ice.
+    - [ ] - Pumpkins
+        > Placing them no longer requires a block below them.
+    - [ ] - Shulker Boxes
+        - [ ] - Changed the purple shulker box to the 1.12 snapshots' purple color.
+        - [ ] - Dyed shulker boxes can now be undyed in a cauldron.
+            > * Use a shulker box on a filled cauldron.
+            > * The water level in the cauldron will decrease by 1.
+    - [ ] - Vines
+        > Multiple vines facing different directions, including on the bottom of blocks, can now be placed in the same block space.
+    - [ ] - Water
+        - [ ] - Has new colors, depending on the biome.
+            > * Dark purple for frozen, indigo for cold, blue/regular for medium (lush), light green for warm/dry biomes.
+            >> *  Swamps have a light green-gray hue, and lukewarm ocean a light teal.
+        - [ ] - Now only blocks 1 light per block, instead of 3.
+            > This only affects newly placed water (for now).
+- [ ] - Items
+    - [ ] - Carrot on a stick
+        > Can now be crafted with a fishing rod that does not have full durability.
+    - [ ] - Elytra
+        > Now require phantom membrane to be repaired instead of leather.
+    - [ ] - Fish
+        > Item textures changed.
+    - [ ] - Fishing rods
+        > Now make sounds when reeled back in.
+    - [ ] - Iron horse armor
+        > Changed the texture when equipped.
+    - [ ] - Maps
+        > [Maps changed slightly in regards to which blocks are shown and which blocks are not](https://www.reddit.com/r/Minecraft/comments/8xo1ex/minecraft_113_map_rendering_changes/)
+- [ ] - Mobs
+    - [ ] - General
+        - [ ] - Zombies, skeletons, ocelots and wolves will naturally attack baby turtles, and zombies and zombie pigmen will seek out and trample turtle eggs.
+        - [ ] - Undead mobs will now sink in water.
+    - [ ] - Horses
+        - [ ] - [The model has been changed to be more consistent with other mobs](https://www.minecraft.net/en-us/article/meet-horse).
+        - [ ] - Some animations like opening its mouth when grazing have been removed from the model as well.
+    - [ ] - Husks
+        > Husks now become a zombie instead of dying from drowning.
+    - [ ] - Parrots
+        > They will now imitate phantoms and drowned.
+    - [ ] - Polar bears
+        > They can now spawn on top of ice.
+    - [ ] - Skeleton horses
+        - [ ] - Are now rideable underwater.
+        - [ ] - Updated model to fix minor texture z-fighting, a glitch where textures overlap in an obtrusive and unintentional way.
+    - [ ] - Squid
+        > Squid now shoot ink and flee quickly in response to being attacked.
+    - [ ] - Zombie horses
+        > Updated model to fix extreme texture z-fighting, just like the skeleton horse.
+    - [ ] - Zombies
+        - [ ] - Zombies now become a drowned instead of dying from drowning.
+        - [ ] - Baby zombies now burn in sunlight.
+        - [ ] - Chicken jockeys now spawn rightly (also valid for zombie pigmen).
+- [ ] - Non-mob entities
+    - [ ] - General
+        - [ ] - Items and experience orbs will now float up in water.
+        - [ ] - Changed the name of several entities: `idk maybe`
+        > * `Block of TNT`        ->  `Primed TNT   `
+        > * `Bolt of Lightning`   ->  `Lightning Bol`t 
+        > * `Ender Crystal`       ->  `End Crystal  ` 
+        > * `Eye of Ender Signal` ->  `Eye of Ender ` 
+        > * `Evocation Fangs`     ->  `Evoker Fangs ` 
+        - [ ] - Item frames
+            > Item frames can now be put on floors and ceilings.
+        - [ ] - Paintings
+            > Paintings now use a resource location for their motive.
+- [ ] - World generation
+    - [ ] - General
+        - [ ] - Rewrote the world generation system.
+        - [ ] - In the Nether, vertical air cavities — stretching from bedrock level to as far as Y=35, and filled with lava from bedrock level to Y=10 – now occur in chains across the bottom of the Nether, often forming extensive ravines.
+        - [ ] - In newly generated chunks, the player is less likely to find frozen oceans next to warm oceans, etc.
+    - [ ] - Biomes
+        - [ ] - The `F3` menu now shows the biome ID, rather than its name.
+        - [ ] - Biome names are now translatable.
+        - [ ] - Updated some biome names:
+            > * `Cold Beach`            ->    `Snowy Beach`
+            > * `DesertHills`  	        ->    `Desert Hills`
+            > * `Extreme Hills`	        ->    `Mountains`
+            > * `Extreme Hills+`	    ->    `Wooded Mountains`
+            > * `ForestHills` 	        ->    `Wooded Hills`
+            > * `FrozenOcean` 	        ->    `Frozen Ocean`
+            > * `FrozenRiver` 	        ->    `Frozen River`
+            > * `Hell`        	        ->    `Nether`
+            > * `Ice Plains`  	        ->    `Snowy Tundra`
+            > * `Ice Mountains` 	    ->    `Snowy Mountains`
+            > * `JungleEdge`  	        ->    `Jungle Edge`
+            > * `JungleHills` 	        ->    `Jungle Hills`
+            > * `Mesa`        	        ->    `Badlands`
+            > * `Mesa Plateau F`	    ->    `Wooded Badlands Plateau`
+            > * `Mesa Plateau`	        ->    `Badlands Plateau`
+            > * `MushroomIsland`	    ->    `Mushroom Fields`
+            > * `MushroomIslandShore` 	->    `Mushroom Field Shore`
+            > * `Birch Forest M`	    ->    `Tall Birch Forest`
+            > * `Birch Forest Hills M`	->    `Tall Birch Hills`
+            > * `Desert M`	            ->    `Desert Lakes`
+            > * `Extreme Hills M`	    ->    `Gravelly Mountains`
+            > * `Extreme Hills+ M`	    ->    `Gravelly Mountains+`
+            > * `Ice Plains Spikes`	    ->    `Ice Spikes`
+            > * `Jungle M`	            ->    `Modified Jungle`
+            > * `JungleEdge M`	        ->    `Modified Jungle Edge`
+            > * `Mesa (Bryce)`	        ->    `Eroded Badlands`
+            > * `Mesa Plateau M`	    ->    `Modified Badlands Plateau`
+            > * `Mesa Plateau F M`	    ->    `Modified Wooded Badlands Plateau`
+            > * `Mega Spruce Taiga`	    ->    `Giant Spruce Taiga`
+            > * `Redwood Taiga Hills M`	->    `Giant Spruce Taiga Hills`
+            > * `Roofed Forest M`	    ->    `Dark Forest Hills`
+            > * `Savanna M`	            ->    `Shattered Savanna`
+            > * `Savanna Plateau M`	    ->    `Shattered Savanna Plateau`
+            > * `Swampland M`	        ->    `Swamp Hills`
+            > * `Taiga M`	            ->    `Taiga Mountains`
+            > * `Cold Taiga M`	        ->    `Snowy Taiga Mountains`
+            > * `Mega Taiga`	        ->    `Giant Tree Taiga`
+            > * `Mega Taiga Hills`      ->    `Giant Tree Taiga Hills`
+            > * `Roofed Forest`	        ->    `Dark Forest`
+            > * `Extreme Hills Edge`	->    `Mountain Edge`
+            > * `Stone Beach`	        ->    `Stone Shore`
+            > * `Swampland`	            ->    `Swamp`
+            > * `Cold Taiga`	        ->    `Snowy Taiga`
+            > * `Cold Taiga Hills`	    ->    `Snowy Taiga Hills`
+            > * `TaigaHills`	        ->    `Taiga Hills`
+    - [ ] - [Customized world type](https://minecraft.fandom.com/wiki/Old_Customized)
+        > Removed.
+    - [ ] - Trees
+        > Large spruce trees now transform nearby grass blocks into podzol when they grow.
+    - [ ] - Witch Huts
+        > Now generate with a mushroom in the flower pot.
+        >> Previously, the flower pot was completely empty.
+- [ ] - Gameplay
+    - [ ] - Movement
+        > Pressing the jump button in flowing water at `level=1`, `level=2` and `level=3` will now do normal jumps instead of swimming up.
+    - [ ] - Oxygen bar
+        > The player's oxygen bar no longer regenerates instantly when they get out of water.
+    - [ ] - Sleep
+        > Players in creative mode can now sleep even if monsters are nearby.
+    - [ ] - Visibility
+        > Changed natural water visibility.
+        >> - [ ] - The longer a player stays underwater, the better they will be able to see.
+        >> - [ ] - Water is darker at lower depths.
+        >> - [ ] - The Water Breathing potion & Respiration enchantment no longer grant enhanced vision underwater.
+        >> - [ ] - Every ocean biome has a unique water color, and the swamp water color has been changed.
+        >> - [ ] - Visibility changes per biome.
+- [ ] - Command format
+    - [ ] - Added commands to the profiler ([`/debug`](https://minecraft.fandom.com/wiki/Commands/debug)).
+    - [ ] - [Functions](https://minecraft.fandom.com/wiki/Function)
+        > Functions are now completely parsed and cached on load.
+        >> This means if a command is incorrect for any reason, the player will know about it on load.
+    - [ ] - `/difficulty`
+        > Players can now query for the current difficulty by using `/difficulty` without any arguments.
+    - [ ] - `/locate`
+        - [ ] - The y-coordinate is now returned as `~` instead of `?`.
+        - [ ] - Now accepts different structure names for all structures previously grouped under `Temple`: `Desert_Pyramid`, `Igloo`, `Jungle_Pyramid`, and `Swamp_Hut`.
+    - [ ] - `/playsound`
+        > Will `Tab ↹` auto-complete custom sound events.
+    - [ ] - `/seed`
+        > The output can now be copied.
+    - [ ] - `/weather`
+        > If a time isn't specified, it now defaults to 5 minutes (previously random).
+- [ ] - General
+    - [ ] - Advancements
+        > Advancement descriptions now have colors:
+        >> * Normal and goal advancements have green descriptions.
+        >> * Challenge advancements have purple descriptions.
+    - [ ] - Music
+        > Three brand new pieces of underwater music by C418 have been added:
+        >> * Shuniji, Dragon Fish and Axolotl.
+        >> * Their ID for commands is `music.under_water`.
+    - [ ] - Options
+        > Removed 3D Anaglyph completely.
+    - [ ] - Particles
+        > Dripping
+        >> * Changed which blocks show dripping liquids.
+        >> * Drip particles are now generated by waterlogged blocks where appropriate.
+        >> * Drip particles now snap to the hitbox of the block they appear on.
+        >> * Added a new block tag to prevent all solid glass blocks from showing dripping liquid particles. See Tags.
+    - [ ] - Recipes
+        - [ ] - Custom recipes can now be loaded from data packs in `data/(namespace)/recipes/(name).json`
+        - [ ] - Added a recipe book for the furnace.
+        - [ ] - Furnace recipes have been moved to JSON files.
+            > * They use `"type": "smelting"`.
+            > * `cookingtime` is used to determine the time it should take to smelt an item in the furnace.
+            > * `experience` is used to determine the amount of experience a player should get when picking the resulting item out of the furnace manually.
+            > * Fuel is not included and is still hardcoded.
+    - [ ] - Statistics
+        > Statistics are being updated.
+        >> * `stat.(stat)` is now `minecraft.custom:minecraft.(stat)`.
+        >> * `stat.(stat).minecraft.(block/item/entity ID)` is now `minecraft.(stat):minecraft.(block/item/entity ID)`.
+    - [ ] - Tooltips
+        - [ ] - Added (and fixed) rarity values for certain items. Items with a rarity value will have their hotbar tooltips, which are displayed when scrolling over them in the hotbar, displayed as their respective colors when highlighted, rather than just being white.
+        > * `Beacon`                         	 -> `Rare`
+        > * `Chain Command Block`	             -> `Epic`
+        > * `Command Block`	                     -> `Epic`
+        > * `Conduit`	                         -> `Rare`
+        > * `Creeper Head`	                     -> `Uncommon`
+        > * `Dragon Egg`	                     -> `Epic`
+        > * `Dragon Head`	                     -> `Uncommon`
+        > * `Dragon's Breath`	                 -> `Uncommon`
+        > * `Elytra`	                         -> `Uncommon`
+        > * `Enchanted Golden Apple`	         -> `Epic`
+        > * `Enchanted Books`	                 -> `Uncommon`
+        > * `Enchanted Items (excluding books)`  -> `Rare`
+        > * `End Crystal`	                     -> `Rare`
+        > * `Bottle o' Enchanting`	             -> `Uncommon`
+        > * `Golden Apple`	                     -> `Rare`
+        > * `Heart of the Sea`	                 -> `Uncommon`
+        > * `Music Discs`	                     -> `Rare`
+        > * `Nether Star`	                     -> `Uncommon`
+        > * `Player Head`	                     -> `Uncommon`
+        > * `Repeating Command Block`	         -> `Epic`
+        > * `Skeleton Skull`	                 -> `Uncommon`
+        > * `Structure Block`	                 -> `Epic`
+        > * `Totem of Undying`	                 -> `Uncommon`
+        > * `Wither Skeleton Skull`	             ->  `Uncommon`
+        > * `Zombie Head`	                     -> `Uncommon`
+        - [ ] - Additionally, attack speed and attack damage in tools' info are now `dark green`.
+    - [ ] - Other.
+        - [ ] -Loading or creating a world shows the percentages of the loading stages.
+            > `Preparing spawn area` now shows as a loading stage.
+        - [ ] - Crash reports now list what data packs are enabled.
+        - [ ] - Data generators are now exposed, players can get a dump of all blocks/items/commands/etc from the game without opening it up.
 
+    
 
 P.s. Changelog taken from [Minecraft Wiki](https://minecraft.fandom.com/wiki/Java_Edition_version_history "Java Edition version history")
