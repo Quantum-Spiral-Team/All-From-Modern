@@ -70,5 +70,7 @@ dependencies {
     runtimeOnly "curse.maven:had-enough-items-557549:7178243"
     implementation rfg.deobf("curse.maven:groovyscript-687577:7092147")
     implementation rfg.deobf("curse.maven:nether-api-1306115:7216794")
+    implementation "curse.maven:the-one-probe-245211:2667280"
+    implementation "curse.maven:top-addons-247111:2887479"
 
 }

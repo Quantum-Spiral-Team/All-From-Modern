@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "afm:blocks/blue_ice",
+    "all": "afm:blocks/blue_ice"
+  }
+}

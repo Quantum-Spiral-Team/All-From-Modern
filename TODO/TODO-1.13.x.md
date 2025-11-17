@@ -2,7 +2,7 @@
 ## 1.13
 ### Additions
 - [ ] - Blocks
-    - [ ] - Blue ice
+    - [x] - Blue ice
     - [ ] - Bubble columns (magma and soul sand underwater)
     - [ ] - Buttons, pressure plates and trapdoors (from all wood)
     - [ ] - Normal pumpkin
@@ -491,6 +491,14 @@
         - [ ] - Crash reports now list what data packs are enabled.
         - [ ] - Data generators are now exposed, players can get a dump of all blocks/items/commands/etc from the game without opening it up.
 
-    
+## 1.13.1
+### Additions
 
+
+
+
+
+\
+\
+\
 P.s. Changelog taken from [Minecraft Wiki](https://minecraft.fandom.com/wiki/Java_Edition_version_history "Java Edition version history")

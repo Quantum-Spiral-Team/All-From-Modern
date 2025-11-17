@@ -1,6 +1,9 @@
-package com.qsteam.allfrommodern;
+package com.qsteam.afm;
 
-import com.qsteam.allfrommodern.proxy.CommonProxy;
+import com.qsteam.afm.block.Blocks;
+import com.qsteam.afm.proxy.CommonProxy;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -20,9 +23,16 @@ public class AllFromModern {
 
     public static final Logger LOGGER = LogManager.getLogger(Tags.MOD_NAME);
 
+    public static final CreativeTabs AFM_TAB = new CreativeTabs("afm") {
+        @Override
+        public ItemStack createIcon() {
+            return new ItemStack(Blocks.BLUE_ICE);
+        }
+    };
+
     @SidedProxy(
-            clientSide = "com.qsteam.allfrommodern.proxy.ClientProxy",
-            serverSide = "com.qsteam.allfrommodern.proxy.CommonProxy"
+            clientSide = "com.qsteam.afm.proxy.ClientProxy",
+            serverSide = "com.qsteam.afm.proxy.CommonProxy"
     )
     public static CommonProxy proxy;
 
