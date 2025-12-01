@@ -11,6 +11,8 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,6 +27,7 @@ public class AllFromModern {
 
     public static final CreativeTabs AFM_TAB = new CreativeTabs("afm") {
         @Override
+        @SideOnly(Side.CLIENT)
         public ItemStack createIcon() {
             return new ItemStack(Blocks.BLUE_ICE);
         }

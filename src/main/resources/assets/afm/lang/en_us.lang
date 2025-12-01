@@ -1,5 +1,10 @@
 # Blocks
 tile.blue_ice.name=Blue Ice
+tile.acacia_button.name=Acacia Button
+tile.dark_oak_button.name=Dark Oak Button
+tile.birch_button.name=Birch Button
+tile.jungle_button.name=Jungle Button
+tile.spruce_button.name=Spruce Button
 
 # Items
 

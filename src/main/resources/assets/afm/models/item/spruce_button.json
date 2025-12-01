@@ -1,0 +1,6 @@
+{
+  "parent": "block/wooden_button_inventory",
+  "textures": {
+    "texture": "blocks/planks_spruce"
+  }
+}

@@ -5,6 +5,9 @@
     - [x] - Blue ice
     - [ ] - Bubble columns (magma and soul sand underwater)
     - [ ] - Buttons, pressure plates and trapdoors (from all wood)
+        - [x] - Buttons
+        - [ ] - Pressure plates
+        - [ ] - Trapdoors
     - [ ] - Normal pumpkin
     - [ ] - Conduits
     - [ ] - Corals, coral fans, coral blocks + dead versions
