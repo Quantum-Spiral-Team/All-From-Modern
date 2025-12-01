@@ -8,9 +8,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -35,13 +35,7 @@ public class BlueIceBlock extends Block {
     }
 
     @Override
-    public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
-        ItemStack heldItem = player.getHeldItemMainhand();
-        if (EnchantmentHelper.getEnchantmentLevel(
-                Enchantments.SILK_TOUCH, heldItem) > 0) {
-            return;
-        }
-        world.setBlockToAir(pos);
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
     }
 
     @Override

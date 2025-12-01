@@ -17,11 +17,11 @@ public class BlockHandler {
 
     private static final List<Block> BLOCKS = Arrays.asList(
             new BlueIceBlock(),
-            new SpruceButtonBlock(),
-            new BirchButtonBlock(),
-            new JungleButtonBlock(),
-            new AcaciaButtonBlock(),
-            new DarkOakButtonBlock()
+            new WoodButtonBlock("spruce_button"),
+            new WoodButtonBlock("birch_button"),
+            new WoodButtonBlock("jungle_button"),
+            new WoodButtonBlock("acacia_button"),
+            new WoodButtonBlock("dark_oak_button")
     );
 
     public static void registerBlockWithoutItem(Block block) {
