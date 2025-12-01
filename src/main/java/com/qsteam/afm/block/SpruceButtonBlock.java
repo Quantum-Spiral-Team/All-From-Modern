@@ -10,25 +10,13 @@ import org.jetbrains.annotations.Nullable;
 
 public class SpruceButtonBlock extends BlockButtonWood {
 
-    private static final String NAME = "spruce_button";
-
     public SpruceButtonBlock() {
         super();
         setHardness(0.5F);
         setSoundType(SoundType.WOOD);
-        setTranslationKey(NAME);
-        setRegistryName(NAME);
+        setTranslationKey("spruce_button");
+        setRegistryName("spruce_button");
         setCreativeTab(AllFromModern.AFM_TAB);
-    }
-
-    @Override
-    protected void playClickSound(@Nullable EntityPlayer player, World worldIn, BlockPos pos) {
-        super.playClickSound(player, worldIn, pos);
-    }
-
-    @Override
-    protected void playReleaseSound(World worldIn, BlockPos pos) {
-        super.playReleaseSound(worldIn, pos);
     }
 
 }

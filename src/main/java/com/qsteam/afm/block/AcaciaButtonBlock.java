@@ -10,25 +10,13 @@ import org.jetbrains.annotations.Nullable;
 
 public class AcaciaButtonBlock extends BlockButtonWood {
 
-    private static final String NAME = "acacia_button";
-
     public AcaciaButtonBlock() {
         super();
         setHardness(0.5F);
         setSoundType(SoundType.WOOD);
-        setTranslationKey(NAME);
-        setRegistryName(NAME);
+        setTranslationKey("acacia_button");
+        setRegistryName("acacia_button");
         setCreativeTab(AllFromModern.AFM_TAB);
-    }
-
-    @Override
-    protected void playClickSound(@Nullable EntityPlayer player, World worldIn, BlockPos pos) {
-        super.playClickSound(player, worldIn, pos);
-    }
-
-    @Override
-    protected void playReleaseSound(World worldIn, BlockPos pos) {
-        super.playReleaseSound(worldIn, pos);
     }
 
 }

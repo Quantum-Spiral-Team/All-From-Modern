@@ -16,6 +16,6 @@ public class Blocks {
     public static final Block BIRCH_BUTTON = getBlockFromRegistry("birch_button");
     public static final Block JUNGLE_BUTTON = getBlockFromRegistry("jungle_button");
     public static final Block ACACIA_BUTTON = getBlockFromRegistry("acacia_button");
-    public static final Block DARK_OAK_BUTTON = getBlockFromRegistry("darl_oak_button");
+    public static final Block DARK_OAK_BUTTON = getBlockFromRegistry("dark_oak_button");
 
 }

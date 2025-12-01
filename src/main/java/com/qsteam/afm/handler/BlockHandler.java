@@ -24,17 +24,17 @@ public class BlockHandler {
             new DarkOakButtonBlock()
     );
 
+    public static void registerBlockWithoutItem(Block block) {
+        ForgeRegistries.BLOCKS.register(block);
+    }
+
     public static void registerBlock(Block block) {
         registerBlockWithoutItem(block);
         ForgeRegistries.ITEMS.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
     }
 
-    public static void registerBlockWithoutItem(Block block) {
-        ForgeRegistries.BLOCKS.register(block);
-    }
-
     @SideOnly(Side.CLIENT)
-    public static void renderItemBlock(Block block) {
+    private static void renderItemBlock(Block block) {
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(
                 Item.getItemFromBlock(block), 0, 
                 new ModelResourceLocation(block.getRegistryName(), "inventory")
