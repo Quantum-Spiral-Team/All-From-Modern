@@ -10,25 +10,29 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class BlockHandler {
 
-    private static final List<Block> BLOCKS = Arrays.asList(
-            new BlueIceBlock(),
-            new WoodButtonBlock("spruce_button"),
-            new WoodButtonBlock("birch_button"),
-            new WoodButtonBlock("jungle_button"),
-            new WoodButtonBlock("acacia_button"),
-            new WoodButtonBlock("dark_oak_button")
-    );
+    private static final String[] WOOD_TYPES = {"spruce", "birch", "jungle", "acacia", "dark_oak"};
+    private static final List<Block> BLOCKS;
+
+    static {
+        List<Block> blocks = new ArrayList<>();
+        blocks.add(new BlueIceBlock());
+        Arrays.stream(WOOD_TYPES).forEach(wood -> blocks.add(new WoodenButtonBlock(wood)));
+        Arrays.stream(WOOD_TYPES).forEach(wood -> blocks.add(new WoodenPressurePlateBlock(wood)));
+        Arrays.stream(WOOD_TYPES).forEach(wood -> blocks.add(new WoodenTrapdoorBlock(wood)));
+        BLOCKS = blocks;
+    }
 
     public static void registerBlockWithoutItem(Block block) {
         ForgeRegistries.BLOCKS.register(block);
     }
 
-    public static void registerBlock(Block block) {
+    private static void registerBlock(Block block) {
         registerBlockWithoutItem(block);
         ForgeRegistries.ITEMS.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
     }

@@ -1,13 +1,25 @@
 # Blocks
+
 tile.blue_ice.name=Blue Ice
 tile.acacia_button.name=Acacia Button
 tile.dark_oak_button.name=Dark Oak Button
 tile.birch_button.name=Birch Button
 tile.jungle_button.name=Jungle Button
 tile.spruce_button.name=Spruce Button
+tile.acacia_trapdoor.name=Acacia Trapdoor
+tile.dark_oak_trapdoor.name=Dark Oak Trapdoor
+tile.birch_trapdoor.name=Birch Trapdoor
+tile.jungle_trapdoor.name=Jungle Trapdoor
+tile.spruce_trapdoor.name=Spruce Trapdoor
+tile.acacia_pressure_plate.name=Acacia Pressure Plate
+tile.dark_oak_pressure_plate.name=Dark Oak Pressure Plate
+tile.birch_pressure_plate.name=Birch Pressure Plate
+tile.jungle_pressure_plate.name=Jungle Pressure Plate
+tile.spruce_pressure_plate.name=Spruce Pressure Plate
 
 # Items
 
 
 # Creative Tabs
+
 itemGroup.afm=All From Modern

@@ -17,5 +17,15 @@ public class Blocks {
     public static final Block JUNGLE_BUTTON = getBlockFromRegistry("jungle_button");
     public static final Block ACACIA_BUTTON = getBlockFromRegistry("acacia_button");
     public static final Block DARK_OAK_BUTTON = getBlockFromRegistry("dark_oak_button");
+    public static final Block SPRUCE_PRESSURE_PLATE = getBlockFromRegistry("spruce_pressure_plate");
+    public static final Block BIRCH_PRESSURE_PLATE = getBlockFromRegistry("birch_pressure_plate");
+    public static final Block JUNGLE_PRESSURE_PLATE = getBlockFromRegistry("jungle_pressure_plate");
+    public static final Block ACACIA_PRESSURE_PLATE = getBlockFromRegistry("acacia_pressure_plate");
+    public static final Block DARK_OAK_PRESSURE_PLATE = getBlockFromRegistry("dark_oak_pressure_plate");
+    public static final Block SPRUCE_TRAPDOOR = getBlockFromRegistry("spruce_trapdoor");
+    public static final Block BIRCH_TRAPDOOR = getBlockFromRegistry("birch_trapdoor");
+    public static final Block JUNGLE_TRAPDOOR = getBlockFromRegistry("jungle_trapdoor");
+    public static final Block ACACIA_TRAPDOOR = getBlockFromRegistry("acacia_trapdoor");
+    public static final Block DARK_OAK_TRAPDOOR = getBlockFromRegistry("dark_oak_trapdoor");
 
 }

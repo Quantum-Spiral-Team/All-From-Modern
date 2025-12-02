@@ -4,14 +4,14 @@ import com.qsteam.afm.AllFromModern;
 import net.minecraft.block.BlockButtonWood;
 import net.minecraft.block.SoundType;
 
-public class WoodButtonBlock extends BlockButtonWood {
+public class WoodenButtonBlock extends BlockButtonWood {
 
-    public WoodButtonBlock(String name) {
+    public WoodenButtonBlock(String wood) {
         super();
         setHardness(0.5F);
         setSoundType(SoundType.WOOD);
-        setTranslationKey(name);
-        setRegistryName(name);
+        setTranslationKey(wood + "_button");
+        setRegistryName(wood + "_button");
         setCreativeTab(AllFromModern.AFM_TAB);
     }
 

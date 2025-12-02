@@ -1,0 +1,6 @@
+{
+  "parent": "block/trapdoor_bottom",
+  "textures": {
+    "texture": "afm:blocks/acacia_trapdoor"
+  }
+}

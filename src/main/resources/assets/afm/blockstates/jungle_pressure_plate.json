@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "powered=false": { "model": "afm:jungle_pressure_plate_up" },
+    "powered=true": { "model": "afm:jungle_pressure_plate_down" }
+  }
+}
