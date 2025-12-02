@@ -1,6 +1,6 @@
 package com.qsteam.afm;
 
-import com.qsteam.afm.block.Blocks;
+import com.qsteam.afm.block.AFMBlocks;
 import com.qsteam.afm.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -29,7 +29,7 @@ public class AllFromModern {
         @Override
         @SideOnly(Side.CLIENT)
         public ItemStack createIcon() {
-            return new ItemStack(Blocks.BLUE_ICE);
+            return new ItemStack(AFMBlocks.BLUE_ICE);
         }
     };
 

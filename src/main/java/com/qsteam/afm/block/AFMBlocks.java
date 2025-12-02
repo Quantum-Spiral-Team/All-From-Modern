@@ -5,7 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-public class Blocks {
+public class AFMBlocks {
 
     private static Block getBlockFromRegistry(String name) {
         return ForgeRegistries.BLOCKS.getValue(new ResourceLocation(Tags.MOD_ID, name));

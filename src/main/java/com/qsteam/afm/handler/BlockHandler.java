@@ -22,9 +22,11 @@ public class BlockHandler {
     static {
         List<Block> blocks = new ArrayList<>();
         blocks.add(new BlueIceBlock());
-        Arrays.stream(WOOD_TYPES).forEach(wood -> blocks.add(new WoodenButtonBlock(wood)));
-        Arrays.stream(WOOD_TYPES).forEach(wood -> blocks.add(new WoodenPressurePlateBlock(wood)));
-        Arrays.stream(WOOD_TYPES).forEach(wood -> blocks.add(new WoodenTrapdoorBlock(wood)));
+        Arrays.stream(WOOD_TYPES).forEach(wood -> {
+            blocks.add(new WoodenButtonBlock(wood));
+            blocks.add(new WoodenPressurePlateBlock(wood));
+            blocks.add(new WoodenTrapdoorBlock(wood));
+        });
         BLOCKS = blocks;
     }
 
@@ -41,7 +43,7 @@ public class BlockHandler {
     private static void renderItemBlock(Block block) {
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(
                 Item.getItemFromBlock(block), 0, 
-                new ModelResourceLocation(block.getRegistryName(), "inventory")
+                new ModelResourceLocation(block.getTranslationKey(), "inventory")
         );
     }
 

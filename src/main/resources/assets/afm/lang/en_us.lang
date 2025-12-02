@@ -1,5 +1,4 @@
 # Blocks
-
 tile.blue_ice.name=Blue Ice
 tile.acacia_button.name=Acacia Button
 tile.dark_oak_button.name=Dark Oak Button
@@ -21,5 +20,4 @@ tile.spruce_pressure_plate.name=Spruce Pressure Plate
 
 
 # Creative Tabs
-
 itemGroup.afm=All From Modern
