@@ -1,0 +1,9 @@
+{
+  "block.pumpkin.carve": {
+    "category": "block",
+    "sounds": [
+      "afm:block/pumpkin/carve1",
+      "afm:block/pumpkin/carve2"
+    ]
+  }
+}

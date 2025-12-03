@@ -5,9 +5,9 @@ import net.minecraft.block.BlockTrapDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-public class WoodenTrapdoorBlock extends BlockTrapDoor {
+public class BlockWoodenTrapdoor extends BlockTrapDoor {
 
-    public WoodenTrapdoorBlock(String wood) {
+    public BlockWoodenTrapdoor(String wood) {
         super(Material.WOOD);
         setSoundType(SoundType.WOOD);
         setTranslationKey(wood + "_trapdoor");

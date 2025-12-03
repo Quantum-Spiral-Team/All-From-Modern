@@ -5,9 +5,9 @@ import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-public class WoodenPressurePlateBlock extends BlockPressurePlate {
+public class BlockWoodenPressurePlate extends BlockPressurePlate {
 
-    public WoodenPressurePlateBlock(String wood) {
+    public BlockWoodenPressurePlate(String wood) {
         super(Material.WOOD, Sensitivity.EVERYTHING);
         setSoundType(SoundType.WOOD);
         setHardness(0.5F);

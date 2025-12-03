@@ -17,9 +17,9 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlueIceBlock extends Block {
+public class BlockBlueIce extends Block {
 
-    public BlueIceBlock() {
+    public BlockBlueIce() {
         super(Material.ICE, MapColor.ICE);
         setRegistryName("blue_ice");
         setTranslationKey("blue_ice");

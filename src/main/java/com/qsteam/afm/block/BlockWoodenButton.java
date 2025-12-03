@@ -4,9 +4,9 @@ import com.qsteam.afm.AllFromModern;
 import net.minecraft.block.BlockButtonWood;
 import net.minecraft.block.SoundType;
 
-public class WoodenButtonBlock extends BlockButtonWood {
+public class BlockWoodenButton extends BlockButtonWood {
 
-    public WoodenButtonBlock(String wood) {
+    public BlockWoodenButton(String wood) {
         super();
         setHardness(0.5F);
         setSoundType(SoundType.WOOD);

@@ -1,7 +1,9 @@
 package com.qsteam.afm.handler;
 
+import com.qsteam.afm.AllFromModern;
 import com.qsteam.afm.block.*;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -21,12 +23,14 @@ public class BlockHandler {
 
     static {
         List<Block> blocks = new ArrayList<>();
-        blocks.add(new BlueIceBlock());
+        blocks.add(new BlockBlueIce());
         Arrays.stream(WOOD_TYPES).forEach(wood -> {
-            blocks.add(new WoodenButtonBlock(wood));
-            blocks.add(new WoodenPressurePlateBlock(wood));
-            blocks.add(new WoodenTrapdoorBlock(wood));
+            blocks.add(new BlockWoodenButton(wood));
+            blocks.add(new BlockWoodenPressurePlate(wood));
+            blocks.add(new BlockWoodenTrapdoor(wood));
         });
+        blocks.add(new BlockHorizontalBase("carved_pumpkin", Material.WOOD)
+                .setHardness(1.0F));
         BLOCKS = blocks;
     }
 
@@ -43,7 +47,7 @@ public class BlockHandler {
     private static void renderItemBlock(Block block) {
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(
                 Item.getItemFromBlock(block), 0, 
-                new ModelResourceLocation(block.getTranslationKey(), "inventory")
+                new ModelResourceLocation(block.getRegistryName(), "inventory")
         );
     }
 

@@ -27,5 +27,6 @@ public class AFMBlocks {
     public static final Block JUNGLE_TRAPDOOR = getBlockFromRegistry("jungle_trapdoor");
     public static final Block ACACIA_TRAPDOOR = getBlockFromRegistry("acacia_trapdoor");
     public static final Block DARK_OAK_TRAPDOOR = getBlockFromRegistry("dark_oak_trapdoor");
+    public static final Block CARVED_PUMPKIN = getBlockFromRegistry("carved_pumpkin");
 
 }
