@@ -13,8 +13,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 
 public class BlockHandler {
 
@@ -24,14 +24,18 @@ public class BlockHandler {
     static {
         List<Block> blocks = new ArrayList<>();
         blocks.add(new BlockBlueIce());
-        Arrays.stream(WOOD_TYPES).forEach(wood -> {
-            blocks.add(new BlockWoodenButton(wood));
-            blocks.add(new BlockWoodenPressurePlate(wood));
-            blocks.add(new BlockWoodenTrapdoor(wood));
-        });
+        addWoodenBlocks(blocks, BlockWoodenButton::new);
+        addWoodenBlocks(blocks, BlockWoodenPressurePlate::new);
+        addWoodenBlocks(blocks, BlockWoodenTrapdoor::new);
         blocks.add(new BlockHorizontalBase("carved_pumpkin", Material.WOOD)
                 .setHardness(1.0F));
         BLOCKS = blocks;
+    }
+
+    private static void addWoodenBlocks(List<Block> blocks, Function<String, Block> factory) {
+        for (String wood : WOOD_TYPES) {
+            blocks.add(factory.apply(wood));
+        }
     }
 
     public static void registerBlockWithoutItem(Block block) {

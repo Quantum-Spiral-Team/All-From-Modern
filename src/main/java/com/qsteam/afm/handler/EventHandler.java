@@ -18,20 +18,22 @@ import static net.minecraft.init.Blocks.PUMPKIN;
 public class EventHandler {
 
     @SubscribeEvent
-    public static void onPlayerRightClick(PlayerInteractEvent.RightClickBlock event) {
-        onPumpkinShear(event);
-    }
+    public static void onPumpkinShear(PlayerInteractEvent.RightClickBlock event) {
+        if (event.getWorld().isRemote || event.getItemStack().getItem() != Items.SHEARS) return;
+        if (event.getWorld().getBlockState(event.getPos()).getBlock() != PUMPKIN) return;
 
-    private static void onPumpkinShear(PlayerInteractEvent.RightClickBlock event) {
-        if (event.getWorld().isRemote) return;
-        if (event.getItemStack().getItem() != Items.SHEARS) return;
+        EnumFacing facing = event.getFace();
+        EnumFacing blockFacing = (facing == EnumFacing.UP || facing == EnumFacing.DOWN) 
+            ? event.getEntityPlayer().getHorizontalFacing().getOpposite() 
+            : facing;
 
-        Block block = event.getWorld().getBlockState(event.getPos()).getBlock();
-        if (block != PUMPKIN) return;
-
-        event.getWorld().setBlockState(event.getPos(), AFMBlocks.CARVED_PUMPKIN.getDefaultState().withProperty(FACING, event.getFace() == EnumFacing.UP || event.getFace() == EnumFacing.DOWN ? event.getEntityPlayer().getHorizontalFacing().getOpposite() : event.getFace()));
-        event.getWorld().spawnEntity(new EntityItem(event.getWorld(), event.getPos().getX() + 0.5, event.getPos().getY() + 0.5, event.getPos().getZ() + 0.5, new ItemStack(Items.PUMPKIN_SEEDS, 4)));
-        event.getWorld().playSound(null, event.getPos(), SoundsHandler.BLOCK_PUMPKIN_CARVE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        event.getWorld().setBlockState(event.getPos(), 
+            AFMBlocks.CARVED_PUMPKIN.getDefaultState().withProperty(FACING, blockFacing));
+        event.getWorld().spawnEntity(new EntityItem(event.getWorld(), 
+            event.getPos().getX() + 0.5, event.getPos().getY() + 0.5, event.getPos().getZ() + 0.5, 
+            new ItemStack(Items.PUMPKIN_SEEDS, 4)));
+        event.getWorld().playSound(null, event.getPos(), 
+            SoundsHandler.BLOCK_PUMPKIN_CARVE, SoundCategory.BLOCKS, 1.0F, 1.0F);
         event.getItemStack().damageItem(1, event.getEntityPlayer());
         event.setCanceled(true);
     }

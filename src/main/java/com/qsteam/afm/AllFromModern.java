@@ -23,6 +23,8 @@ import org.apache.logging.log4j.Logger;
         dependencies = Tags.DEPENDENCIES)
 public class AllFromModern {
 
+//    TODO: добавить крафты люков, пластин и кнопок; поменять спавн големов разных
+
     public static final Logger LOGGER = LogManager.getLogger(Tags.MOD_NAME);
 
     public static final CreativeTabs AFM_TAB = new CreativeTabs("afm") {
