@@ -9,5 +9,7 @@
 		"MixinBlockPumpkin"
 	],
 	"server": [],
-	"client": []
+	"client": [
+		"MixinLayerSnowmanHead"
+	]
 }
