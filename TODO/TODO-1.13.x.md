@@ -8,7 +8,7 @@
         - [x] - Buttons
         - [x] - Pressure plates
         - [x] - Trapdoors
-    - [ ] - Normal pumpkin
+    - [x] - Normal pumpkin
     - [ ] - Conduits
     - [ ] - Corals, coral fans, coral blocks + dead versions
     - [ ] - Dried kelp blocks
@@ -31,7 +31,7 @@
     - [ ] - Smooth quartz
     - [ ] - Trident (weapon)
     - [ ] - Turtle shells
-    - [ ] - Wood blocks
+    - [x] - Wood blocks
 - [ ] Mobs
     - [ ] - Dolphin
     - [ ] - Drowned
@@ -243,7 +243,7 @@
 - [ ] - Blocks
     - [ ] - General
         - [ ] - Blocks which used to have no bottom texture (like repeaters, comparators, etc.) now have a bottom texture, not including redstone wire.
-        - [ ] -Blocks with a collision box now have matching bounding boxes.
+        - [ ] - Blocks with a collision box now have matching bounding boxes.
             > * Affected: anvils, cauldrons, hoppers, fences, iron bars, glass panes, filled end portal frames, vines, lily pads, stairs, brewing stands, and pistons.
             > * Updated the collision box of anvils and hoppers.
             > * Does not affect blocks with a collision box smaller than their model, such as soul sand and snow layers.
