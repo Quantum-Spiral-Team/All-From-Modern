@@ -1,6 +1,5 @@
 package com.qsteam.afm.handler;
 
-import com.qsteam.afm.AllFromModern;
 import com.qsteam.afm.block.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
