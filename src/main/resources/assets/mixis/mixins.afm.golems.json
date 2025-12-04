@@ -1,5 +1,5 @@
 {
-	"package": "com.qsteam.afm.mixin",
+	"package": "com.qsteam.afm.mixin.golems",
 	"required": true,
 	"refmap": "mixins.allfrommodern.refmap.json",
 	"target": "@env(DEFAULT)",
