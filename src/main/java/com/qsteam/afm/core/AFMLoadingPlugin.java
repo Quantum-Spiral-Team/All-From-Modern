@@ -14,13 +14,11 @@ public class AFMLoadingPlugin implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
     public static final boolean isClient = FMLLaunchHandler.side().isClient();
 
-    private static final Map<String, BooleanSupplier> SERVER_MIXIN_CONFIGS = ImmutableMap.copyOf(new HashMap<String, BooleanSupplier>() {});
+    private static final Map<String, BooleanSupplier> SERVER_MIXIN_CONFIGS = Collections.emptyMap();
 
-    private static final Map<String, BooleanSupplier> COMMON_MIXIN_CONFIGS = ImmutableMap.copyOf(new HashMap<String, BooleanSupplier>(){
-        {
-            put("mixins.afm.golems.json", () -> true);
-        }
-    });
+    private static final Map<String, BooleanSupplier> COMMON_MIXIN_CONFIGS = ImmutableMap.of(
+            "mixins/mixins.afm.golems.json", () -> true
+    );
 
     @Override
     public String[] getASMTransformerClass() {
@@ -51,7 +49,7 @@ public class AFMLoadingPlugin implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
     @Override
     public String getAccessTransformerClass() {
-        return "";
+        return "com.qsteam.afm.core.AFMTransformer";
     }
 
 
