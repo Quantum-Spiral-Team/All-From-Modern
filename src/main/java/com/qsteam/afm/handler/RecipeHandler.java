@@ -6,6 +6,8 @@ import net.minecraftforge.registries.IForgeRegistryModifiable;
 
 public class RecipeHandler {
 
+    private static final IForgeRegistryModifiable RECIPES = (IForgeRegistryModifiable) ForgeRegistries.RECIPES;
+
     public static void removeRecipes() {
         removeRecipe(new ResourceLocation("minecraft:wooden_button"));
         removeRecipe(new ResourceLocation("minecraft:trapdoor"));
@@ -13,7 +15,7 @@ public class RecipeHandler {
     }
 
     private static void removeRecipe(ResourceLocation recipeName) {
-        ((IForgeRegistryModifiable) ForgeRegistries.RECIPES).remove(recipeName);
+        RECIPES.remove(recipeName);
     }
 
 }

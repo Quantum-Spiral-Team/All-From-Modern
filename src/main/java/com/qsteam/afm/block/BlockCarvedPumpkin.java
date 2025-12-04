@@ -110,7 +110,7 @@ public class BlockCarvedPumpkin extends BlockHorizontal {
         world.spawnEntity(snowman);
         
         triggerSummonedEntity(world, snowman);
-        for (int j1 = 0; j1 < 120; ++j1) {
+        for (int j1 = 0; j1 < SPAWN_PARTICLE_COUNT; ++j1) {
             spawnEffectParticles((WorldServer) world, spawnPos, EnumParticleTypes.SNOW_SHOVEL, 2.5D);
         }
         notifyNeighbors(world, helper, snowmanPattern.getThumbLength(), 1);
@@ -126,7 +126,7 @@ public class BlockCarvedPumpkin extends BlockHorizontal {
         world.spawnEntity(golem);
         
         triggerSummonedEntity(world, golem);
-        for (int j1 = 0; j1 < 120; ++j1) {
+        for (int j1 = 0; j1 < SPAWN_PARTICLE_COUNT; ++j1) {
             spawnEffectParticles((WorldServer) world, spawnPos, EnumParticleTypes.SNOWBALL, 3.9D);
         }
         notifyNeighbors(world, helper, golemPattern.getThumbLength(), golemPattern.getPalmLength());
