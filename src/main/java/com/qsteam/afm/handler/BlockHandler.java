@@ -26,8 +26,7 @@ public class BlockHandler {
         addWoodenBlocks(blocks, BlockWoodenButton::new);
         addWoodenBlocks(blocks, BlockWoodenPressurePlate::new);
         addWoodenBlocks(blocks, BlockWoodenTrapdoor::new);
-        blocks.add(new BlockHorizontalBase("carved_pumpkin", Material.WOOD)
-                .setHardness(1.0F));
+        blocks.add(new BlockCarvedPumpkin());
         BLOCKS = blocks;
     }
 
