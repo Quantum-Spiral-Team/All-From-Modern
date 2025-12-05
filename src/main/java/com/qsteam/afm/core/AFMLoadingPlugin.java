@@ -49,7 +49,7 @@ public class AFMLoadingPlugin implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
     @Override
     public String getAccessTransformerClass() {
-        return "com.qsteam.afm.core.AFMTransformer";
+        return AFMTransformer.class.getName();
     }
 
 

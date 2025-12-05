@@ -5,9 +5,9 @@ import com.qsteam.afm.block.prismarine.BlockPrismarineSlab;
 import com.qsteam.afm.block.prismarine.BlockPrismarineStairs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPrismarine;
-import net.minecraft.init.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSlab;
@@ -15,18 +15,15 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Function;
 
+@SuppressWarnings("deprecation")
 public class BlockHandler {
 
     private static final List<String> WOOD_TYPES = Collections.unmodifiableList(
-        java.util.Arrays.asList("spruce", "birch", "jungle", "acacia", "dark_oak"));
+        Arrays.asList("spruce", "birch", "jungle", "acacia", "dark_oak"));
     private static final List<Block> BLOCKS;
-
     private static final List<SlabPair> SLAB_PAIRS = new ArrayList<>();
 
     static {
@@ -67,7 +64,8 @@ public class BlockHandler {
         if (block instanceof BlockPrismarineSlab.Half) {
             for (SlabPair pair : SLAB_PAIRS) {
                 if (pair.half == block) {
-                    ForgeRegistries.ITEMS.register(new ItemSlab(pair.half, pair.half, pair.doubleSlab).setRegistryName(block.getRegistryName()));
+                    ForgeRegistries.ITEMS.register(new ItemSlab(pair.half, pair.half, pair.doubleSlab)
+                        .setRegistryName(Objects.requireNonNull(block.getRegistryName())));
                     break;
                 }
             }
@@ -87,18 +85,12 @@ public class BlockHandler {
     }
 
     @SideOnly(Side.CLIENT)
-    private static void renderItemBlock(Block block) {
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(
-                Item.getItemFromBlock(block), 0, 
-                new ModelResourceLocation(Objects.requireNonNull(block.getRegistryName()), "inventory")
-        );
-    }
-
-    @SideOnly(Side.CLIENT)
     public static void render() {
         BLOCKS.forEach(block -> {
             if (!(block instanceof BlockPrismarineSlab.Double)) {
-                renderItemBlock(block);
+                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(
+                    Item.getItemFromBlock(block), 0,
+                    new ModelResourceLocation(Objects.requireNonNull(block.getRegistryName()), "inventory"));
             }
         });
     }

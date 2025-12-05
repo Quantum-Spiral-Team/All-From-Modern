@@ -26,6 +26,7 @@ public class EventHandler {
             ? event.getEntityPlayer().getHorizontalFacing().getOpposite() 
             : facing;
 
+        assert blockFacing != null;
         event.getWorld().setBlockState(event.getPos(),
             AFMBlocks.CARVED_PUMPKIN.getDefaultState().withProperty(FACING, blockFacing));
         event.getWorld().spawnEntity(new EntityItem(event.getWorld(), 

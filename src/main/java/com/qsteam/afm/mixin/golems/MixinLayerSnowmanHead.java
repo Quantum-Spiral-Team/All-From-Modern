@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(LayerSnowmanHead.class)
 public class MixinLayerSnowmanHead {
 
-    @Redirect(method = "doRenderLayer", at = @At(value = "NEW", target = "net/minecraft/item/ItemStack"))
+    @Redirect(method = "doRenderLayer*", at = @At(value = "NEW", target = "net/minecraft/item/ItemStack"))
     private ItemStack useCarvedPumpkin(net.minecraft.block.Block block, int count) {
         return new ItemStack(AFMBlocks.CARVED_PUMPKIN, 1);
     }

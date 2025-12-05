@@ -38,7 +38,7 @@ public abstract class BlockPrismarineSlab extends BlockSlab {
 
     @Override
     @SuppressWarnings("deprecation")
-    public @NotNull MapColor getMapColor(@NotNull IBlockState state, @NotNull IBlockAccess worldIn, BlockPos pos) {
+    public @NotNull MapColor getMapColor(@NotNull IBlockState state, @NotNull IBlockAccess worldIn, @NotNull BlockPos pos) {
         return prismarineType == BlockPrismarine.EnumType.ROUGH ? MapColor.CYAN : MapColor.DIAMOND;
     }
 
@@ -53,7 +53,7 @@ public abstract class BlockPrismarineSlab extends BlockSlab {
     }
 
     @Override
-    public @NotNull Comparable<?> getTypeForItem(ItemStack stack) {
+    public @NotNull Comparable<?> getTypeForItem(@NotNull ItemStack stack) {
         return Variant.DEFAULT;
     }
 
@@ -107,7 +107,7 @@ public abstract class BlockPrismarineSlab extends BlockSlab {
         DEFAULT;
 
         @Override
-        public String getName() {
+        public @NotNull String getName() {
             return "default";
         }
     }
