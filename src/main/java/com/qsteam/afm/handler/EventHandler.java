@@ -1,7 +1,6 @@
 package com.qsteam.afm.handler;
 
 import com.qsteam.afm.block.AFMBlocks;
-import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -27,7 +26,7 @@ public class EventHandler {
             ? event.getEntityPlayer().getHorizontalFacing().getOpposite() 
             : facing;
 
-        event.getWorld().setBlockState(event.getPos(), 
+        event.getWorld().setBlockState(event.getPos(),
             AFMBlocks.CARVED_PUMPKIN.getDefaultState().withProperty(FACING, blockFacing));
         event.getWorld().spawnEntity(new EntityItem(event.getWorld(), 
             event.getPos().getX() + 0.5, event.getPos().getY() + 0.5, event.getPos().getZ() + 0.5, 

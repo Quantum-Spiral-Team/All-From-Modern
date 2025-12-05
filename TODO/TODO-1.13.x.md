@@ -13,7 +13,7 @@
     - [ ] - Corals, coral fans, coral blocks + dead versions
     - [ ] - Dried kelp blocks
     - [ ] - Kelp
-    - [ ] - Prismarine stairs and slabs
+    - [x] - Prismarine stairs and slabs
     - [ ] - Seagrass
     - [ ] - Stripped logs and wood
     - [ ] - Turtle eggs

@@ -1,4 +1,4 @@
-package com.qsteam.afm.block;
+package com.qsteam.afm.block.base;
 
 import com.qsteam.afm.AllFromModern;
 import net.minecraft.block.Block;

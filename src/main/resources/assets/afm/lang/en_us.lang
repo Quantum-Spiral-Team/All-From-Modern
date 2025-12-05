@@ -16,6 +16,12 @@ tile.birch_pressure_plate.name=Birch Pressure Plate
 tile.jungle_pressure_plate.name=Jungle Pressure Plate
 tile.spruce_pressure_plate.name=Spruce Pressure Plate
 tile.carved_pumpkin.name=Carved Pumpkin
+tile.prismarine_stairs_rough.name=Prismarine Stairs
+tile.prismarine_stairs_bricks.name=Prismarine Brick Stairs
+tile.prismarine_stairs_dark.name=Dark Prismarine Stairs
+tile.prismarine_slab_rough.name=Prismarine Slab
+tile.prismarine_slab_bricks.name=Prismarine Brick Slab
+tile.prismarine_slab_dark.name=Dark Prismarine Slab
 
 # Items
 
