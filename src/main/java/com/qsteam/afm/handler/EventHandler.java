@@ -1,40 +1,32 @@
 package com.qsteam.afm.handler;
 
-import com.qsteam.afm.block.AFMBlocks;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.block.BlockLog;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemAxe;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import static net.minecraft.block.BlockHorizontal.FACING;
-import static net.minecraft.init.Blocks.PUMPKIN;
 
 @EventBusSubscriber
 public class EventHandler {
 
     @SubscribeEvent
-    public static void onPumpkinShear(PlayerInteractEvent.RightClickBlock event) {
-        if (event.getWorld().isRemote || event.getItemStack().getItem() != Items.SHEARS) return;
-        if (event.getWorld().getBlockState(event.getPos()).getBlock() != PUMPKIN) return;
+    public static void onLogStripping(PlayerInteractEvent.RightClickBlock event) {
+        if (event.getWorld().isRemote ||
+                !(event.getItemStack().getItem() instanceof ItemAxe) ||
+                !(event.getWorld().getBlockState(event.getPos()).getBlock() instanceof BlockLog)) return;
 
-        EnumFacing facing = event.getFace();
-        EnumFacing blockFacing = (facing == EnumFacing.UP || facing == EnumFacing.DOWN) 
-            ? event.getEntityPlayer().getHorizontalFacing().getOpposite() 
-            : facing;
 
-        assert blockFacing != null;
-        event.getWorld().setBlockState(event.getPos(),
-            AFMBlocks.CARVED_PUMPKIN.getDefaultState().withProperty(FACING, blockFacing));
-        event.getWorld().spawnEntity(new EntityItem(event.getWorld(), 
-            event.getPos().getX() + 0.5, event.getPos().getY() + 0.5, event.getPos().getZ() + 0.5, 
-            new ItemStack(Items.PUMPKIN_SEEDS, 4)));
-        event.getWorld().playSound(null, event.getPos(), 
-            SoundsHandler.BLOCK_PUMPKIN_CARVE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+        World world = event.getWorld();
+        BlockPos pos = event.getPos();
+        IBlockState state = world.getBlockState(pos);
+//        world.setBlockState(event.getPos(), AFMBlocks.STRIPPED_LOGS.get().getDefaultState());
+
         event.getItemStack().damageItem(1, event.getEntityPlayer());
         event.setCanceled(true);
+
     }
 }

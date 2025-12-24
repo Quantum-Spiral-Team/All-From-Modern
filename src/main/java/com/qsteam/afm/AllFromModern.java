@@ -1,7 +1,6 @@
 package com.qsteam.afm;
 
 import com.qsteam.afm.block.AFMBlocks;
-import com.qsteam.afm.core.AFMTransformer;
 import com.qsteam.afm.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -16,7 +15,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jetbrains.annotations.NotNull;
 
 @Mod(
         modid = Tags.MOD_ID,
@@ -30,14 +28,14 @@ public class AllFromModern {
     public static final CreativeTabs AFM_TAB = new CreativeTabs("afm") {
         @Override
         @SideOnly(Side.CLIENT)
-        public @NotNull ItemStack createIcon() {
+        public ItemStack createIcon() {
             return new ItemStack(AFMBlocks.BLUE_ICE);
         }
     };
 
     @SidedProxy(
-            clientSide = "com.qsteam.afm.proxy.ClientProxy",
-            serverSide = "com.qsteam.afm.proxy.CommonProxy"
+            clientSide = Tags.CLIENT_PROXY_PATH,
+            serverSide = Tags.SERVER_PROXY_PATH
     )
     public static CommonProxy proxy;
 

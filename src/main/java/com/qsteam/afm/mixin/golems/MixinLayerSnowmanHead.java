@@ -2,8 +2,6 @@ package com.qsteam.afm.mixin.golems;
 
 import com.qsteam.afm.block.AFMBlocks;
 import net.minecraft.client.renderer.entity.layers.LayerSnowmanHead;
-import net.minecraft.entity.monster.EntitySnowman;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

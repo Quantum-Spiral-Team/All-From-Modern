@@ -1,4 +1,4 @@
-package com.qsteam.afm.block.prismarine;
+package com.qsteam.afm.block;
 
 import com.qsteam.afm.AllFromModern;
 import net.minecraft.block.BlockPrismarine;
@@ -14,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import org.jetbrains.annotations.NotNull;
 
 public abstract class BlockPrismarineSlab extends BlockSlab {
 
@@ -38,28 +37,28 @@ public abstract class BlockPrismarineSlab extends BlockSlab {
 
     @Override
     @SuppressWarnings("deprecation")
-    public @NotNull MapColor getMapColor(@NotNull IBlockState state, @NotNull IBlockAccess worldIn, @NotNull BlockPos pos) {
+    public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         return prismarineType == BlockPrismarine.EnumType.ROUGH ? MapColor.CYAN : MapColor.DIAMOND;
     }
 
     @Override
-    public @NotNull String getTranslationKey(int meta) {
+    public String getTranslationKey(int meta) {
         return super.getTranslationKey();
     }
 
     @Override
-    public @NotNull IProperty<?> getVariantProperty() {
+    public IProperty<?> getVariantProperty() {
         return VARIANT;
     }
 
     @Override
-    public @NotNull Comparable<?> getTypeForItem(@NotNull ItemStack stack) {
+    public Comparable<?> getTypeForItem(ItemStack stack) {
         return Variant.DEFAULT;
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public @NotNull IBlockState getStateFromMeta(int meta) {
+    public IBlockState getStateFromMeta(int meta) {
         IBlockState state = this.getDefaultState().withProperty(VARIANT, Variant.DEFAULT);
         if (!this.isDouble()) {
             state = state.withProperty(HALF, (meta & 8) == 0 ? EnumBlockHalf.BOTTOM : EnumBlockHalf.TOP);
@@ -68,7 +67,7 @@ public abstract class BlockPrismarineSlab extends BlockSlab {
     }
 
     @Override
-    public int getMetaFromState(@NotNull IBlockState state) {
+    public int getMetaFromState(IBlockState state) {
         int i = 0;
         if (!this.isDouble() && state.getValue(HALF) == EnumBlockHalf.TOP) {
             i |= 8;
@@ -77,7 +76,7 @@ public abstract class BlockPrismarineSlab extends BlockSlab {
     }
 
     @Override
-    protected @NotNull BlockStateContainer createBlockState() {
+    protected BlockStateContainer createBlockState() {
         return this.isDouble() ? new BlockStateContainer(this, VARIANT) : new BlockStateContainer(this, HALF, VARIANT);
     }
 
@@ -107,7 +106,7 @@ public abstract class BlockPrismarineSlab extends BlockSlab {
         DEFAULT;
 
         @Override
-        public @NotNull String getName() {
+        public String getName() {
             return "default";
         }
     }

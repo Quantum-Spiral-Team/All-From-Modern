@@ -1,8 +1,9 @@
 package com.qsteam.afm.handler;
 
 import com.qsteam.afm.block.*;
-import com.qsteam.afm.block.prismarine.BlockPrismarineSlab;
-import com.qsteam.afm.block.prismarine.BlockPrismarineStairs;
+import com.qsteam.afm.block.BlockPrismarineSlab;
+import com.qsteam.afm.block.BlockPrismarineStairs;
+import com.qsteam.afm.item.itemblock.ItemBlockStrippedLog;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPrismarine;
 import net.minecraft.client.Minecraft;
@@ -25,6 +26,7 @@ public class BlockHandler {
         Arrays.asList("spruce", "birch", "jungle", "acacia", "dark_oak"));
     private static final List<Block> BLOCKS;
     private static final List<SlabPair> SLAB_PAIRS = new ArrayList<>();
+    private static final Map<Block, ItemBlock> META_BLOCKS;
 
     static {
         List<Block> blocks = new ArrayList<>();
@@ -47,6 +49,11 @@ public class BlockHandler {
             blocks.add(doubleSlab);
         }
         BLOCKS = Collections.unmodifiableList(blocks);
+
+        Map<Block, ItemBlock> metaBlocks = new HashMap<>();
+        BlockStrippedLog strippedLog = new BlockStrippedLog();
+        metaBlocks.put(strippedLog, new ItemBlockStrippedLog(strippedLog));
+        META_BLOCKS = metaBlocks;
     }
 
     private static void addWoodenBlocks(List<Block> blocks, Function<String, Block> factory) {
@@ -55,7 +62,7 @@ public class BlockHandler {
         }
     }
 
-    public static void registerBlockWithoutItem(Block block) {
+    private static void registerBlockWithoutItem(Block block) {
         ForgeRegistries.BLOCKS.register(block);
     }
 
@@ -72,6 +79,11 @@ public class BlockHandler {
         } else if (!(block instanceof BlockPrismarineSlab.Double)) {
             ForgeRegistries.ITEMS.register(new ItemBlock(block).setRegistryName(Objects.requireNonNull(block.getRegistryName())));
         }
+    }
+
+    private static void registerMetaBlock(Block block, ItemBlock itemBlock) {
+        registerBlockWithoutItem(block);
+        ForgeRegistries.ITEMS.register(itemBlock.setRegistryName(Objects.requireNonNull(block.getRegistryName())));
     }
 
     private static class SlabPair {
@@ -93,10 +105,17 @@ public class BlockHandler {
                     new ModelResourceLocation(Objects.requireNonNull(block.getRegistryName()), "inventory"));
             }
         });
+        META_BLOCKS.forEach((block, item) ->
+            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(
+                item, 0,
+                new ModelResourceLocation(Objects.requireNonNull(block.getRegistryName()),"inventory")
+            )
+        );
     }
 
     public static void register() {
         BLOCKS.forEach(BlockHandler::registerBlock);
+        META_BLOCKS.forEach(BlockHandler::registerMetaBlock);
     }
 
 }

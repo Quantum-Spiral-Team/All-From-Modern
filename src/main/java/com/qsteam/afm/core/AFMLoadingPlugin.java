@@ -5,7 +5,6 @@ import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import zone.rong.mixinbooter.IEarlyMixinLoader;
 
-import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.BooleanSupplier;
 
@@ -30,7 +29,6 @@ public class AFMLoadingPlugin implements IFMLLoadingPlugin, IEarlyMixinLoader {
         return null;
     }
 
-    @Nullable
     @Override
     public String getSetupClass() {
         return null;
