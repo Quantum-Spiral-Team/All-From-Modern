@@ -29,5 +29,7 @@ public class AFMBlocks {
     public static final Block DARK_OAK_TRAPDOOR = getBlockFromRegistry("dark_oak_trapdoor");
     public static final Block CARVED_PUMPKIN = getBlockFromRegistry("carved_pumpkin");
     public static final Block STRIPPED_LOG = getBlockFromRegistry("stripped_log");
+    public static final Block STRIPPED_LOG2 = getBlockFromRegistry("stripped_log2");
+
 
 }
