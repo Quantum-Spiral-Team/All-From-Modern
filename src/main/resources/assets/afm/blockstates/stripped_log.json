@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "axis=y,variant=oak": { "model": "afm:stripped_oak_log" },
+    "axis=x,variant=oak": { "model": "afm:stripped_oak_log", "x": 90, "y": 90 },
+    "axis=z,variant=oak": { "model": "afm:stripped_oak_log", "x": 90 },
+    "axis=none,variant=oak": { "model": "afm:stripped_oak_log_all" },
+    "axis=y,variant=spruce": { "model": "afm:stripped_spruce_log" },
+    "axis=x,variant=spruce": { "model": "afm:stripped_spruce_log", "x": 90, "y": 90 },
+    "axis=z,variant=spruce": { "model": "afm:stripped_spruce_log", "x": 90 },
+    "axis=none,variant=spruce": { "model": "afm:stripped_spruce_log_all" },
+    "axis=y,variant=birch": { "model": "afm:stripped_birch_log" },
+    "axis=x,variant=birch": { "model": "afm:stripped_birch_log", "x": 90, "y": 90 },
+    "axis=z,variant=birch": { "model": "afm:stripped_birch_log", "x": 90 },
+    "axis=none,variant=birch": { "model": "afm:stripped_birch_log_all" },
+    "axis=y,variant=jungle": { "model": "afm:stripped_jungle_log" },
+    "axis=x,variant=jungle": { "model": "afm:stripped_jungle_log", "x": 90, "y": 90 },
+    "axis=z,variant=jungle": { "model": "afm:stripped_jungle_log", "x": 90 },
+    "axis=none,variant=jungle": { "model": "afm:stripped_jungle_log_all" }
+  }
+}

@@ -5,6 +5,7 @@ import com.qsteam.afm.block.BlockPrismarineSlab;
 import com.qsteam.afm.block.BlockPrismarineStairs;
 import com.qsteam.afm.item.itemblock.ItemBlockStrippedLog;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.BlockPrismarine;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -12,6 +13,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSlab;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -51,8 +53,10 @@ public class BlockHandler {
         BLOCKS = Collections.unmodifiableList(blocks);
 
         Map<Block, ItemBlock> metaBlocks = new HashMap<>();
-        BlockStrippedLog strippedLog = new BlockStrippedLog();
-        metaBlocks.put(strippedLog, new ItemBlockStrippedLog(strippedLog));
+        BlockStrippedOldLog strippedOldLog = new BlockStrippedOldLog();
+        metaBlocks.put(strippedOldLog, new ItemBlockStrippedLog(strippedOldLog));
+        BlockStrippedNewLog strippedNewLog = new BlockStrippedNewLog();
+        metaBlocks.put(strippedNewLog, new ItemBlockStrippedLog(strippedNewLog));
         META_BLOCKS = metaBlocks;
     }
 
@@ -105,12 +109,26 @@ public class BlockHandler {
                     new ModelResourceLocation(Objects.requireNonNull(block.getRegistryName()), "inventory"));
             }
         });
-        META_BLOCKS.forEach((block, item) ->
-            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(
-                item, 0,
-                new ModelResourceLocation(Objects.requireNonNull(block.getRegistryName()),"inventory")
-            )
-        );
+        META_BLOCKS.forEach((block, item) -> {
+            if (block instanceof BlockStrippedOldLog) {
+                for (int i = 0; i < 4; i++) {
+                    ModelLoader.setCustomModelResourceLocation(
+                            item,
+                            i,
+                            new ModelResourceLocation(Objects.requireNonNull(block.getRegistryName()), "inventory")
+                    );
+                }
+            }
+            else if (block instanceof BlockStrippedNewLog) {
+                for (int i = 0; i < 2; i++) {
+                    ModelLoader.setCustomModelResourceLocation(
+                            item,
+                            i,
+                            new ModelResourceLocation(Objects.requireNonNull(block.getRegistryName()), "inventory")
+                    );
+                }
+            }
+        });
     }
 
     public static void register() {

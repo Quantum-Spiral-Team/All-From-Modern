@@ -1,42 +1,39 @@
 package com.qsteam.afm.item.itemblock;
 
-import com.qsteam.afm.AllFromModern;
-import com.qsteam.afm.block.BlockStrippedLog;
+import com.qsteam.afm.block.BlockStrippedNewLog;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPlanks;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemMultiTexture;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
+
+import static com.qsteam.afm.AllFromModern.AFM_TAB;
 
 public class ItemBlockStrippedLog extends ItemMultiTexture {
 
-    private static final String[] VARIANTS = new String[BlockPlanks.EnumType.values().length];
-
-    static {
-        int i = 0;
-        for (BlockPlanks.EnumType type : BlockPlanks.EnumType.values()) {
-            VARIANTS[i] = type.getName();
-            i++;
-        }
+    public ItemBlockStrippedLog(Block block) {
+        super(block, block, ItemBlockStrippedLog::getVariantName);
+        setHasSubtypes(true);
+        setCreativeTab(AFM_TAB);
     }
 
-    public ItemBlockStrippedLog(Block block) {
-        super(block, block, VARIANTS);
-        setHasSubtypes(true);
-        setCreativeTab(AllFromModern.AFM_TAB);
+    private static String getVariantName(ItemStack stack) {
+        int meta = stack.getMetadata();
+        Block block = ((ItemBlock)stack.getItem()).getBlock();
+
+        int enumIndex;
+        if (block instanceof BlockStrippedNewLog) {
+            enumIndex = meta + 4;
+        } else {
+            enumIndex = meta;
+        }
+
+        return BlockPlanks.EnumType.byMetadata(enumIndex).getName();
     }
 
     @Override
     public String getTranslationKey(ItemStack stack) {
-        return super.getTranslationKey() + "_" + BlockPlanks.EnumType.byMetadata(stack.getMetadata()).getName();
-    }
-
-    @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        if (this.isInCreativeTab(tab)) {
-            this.block.getSubBlocks(tab, items);
-        }
+        return super.getTranslationKey(stack)/* + "." + getVariantName(stack)*/;
     }
 
 }

@@ -22,6 +22,12 @@ tile.prismarine_stairs_dark.name=Dark Prismarine Stairs
 tile.prismarine_slab_rough.name=Prismarine Slab
 tile.prismarine_slab_bricks.name=Prismarine Brick Slab
 tile.prismarine_slab_dark.name=Dark Prismarine Slab
+tile.stripped_log.oak.name=Stripped Oak Log
+tile.stripped_log.spruce.name=Stripped Spruce Log
+tile.stripped_log.birch.name=Stripped Birch Log
+tile.stripped_log.jungle.name=Stripped Jungle Log
+tile.stripped_log2.acacia.name=Stripped Acacia Log
+tile.stripped_log2.dark_oak.name=Stripped Dark Oak Log
 
 # Items
 
