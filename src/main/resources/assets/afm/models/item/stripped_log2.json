@@ -1,0 +1,9 @@
+{
+  "parent": "item/generated",
+  "variants": {
+    "inventory": [
+      { "model": "afm:block/stripped_acacia_log", "predicate": { "meta": 0 } },
+      { "model": "afm:block/stripped_dark_oak_log", "predicate": { "meta": 1 } }
+    ]
+  }
+}

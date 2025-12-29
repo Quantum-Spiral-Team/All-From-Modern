@@ -5,11 +5,11 @@ import com.qsteam.afm.block.BlockPrismarineSlab;
 import com.qsteam.afm.block.BlockPrismarineStairs;
 import com.qsteam.afm.item.itemblock.ItemBlockStrippedLog;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.BlockPrismarine;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSlab;
@@ -53,10 +53,10 @@ public class BlockHandler {
         BLOCKS = Collections.unmodifiableList(blocks);
 
         Map<Block, ItemBlock> metaBlocks = new HashMap<>();
-        BlockStrippedOldLog strippedOldLog = new BlockStrippedOldLog();
-        metaBlocks.put(strippedOldLog, new ItemBlockStrippedLog(strippedOldLog));
         BlockStrippedNewLog strippedNewLog = new BlockStrippedNewLog();
         metaBlocks.put(strippedNewLog, new ItemBlockStrippedLog(strippedNewLog));
+        BlockStrippedOldLog strippedOldLog = new BlockStrippedOldLog();
+        metaBlocks.put(strippedOldLog, new ItemBlockStrippedLog(strippedOldLog));
         META_BLOCKS = metaBlocks;
     }
 
@@ -104,28 +104,27 @@ public class BlockHandler {
     public static void render() {
         BLOCKS.forEach(block -> {
             if (!(block instanceof BlockPrismarineSlab.Double)) {
-                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(
-                    Item.getItemFromBlock(block), 0,
-                    new ModelResourceLocation(Objects.requireNonNull(block.getRegistryName()), "inventory"));
+                Item item = Item.getItemFromBlock(block);
+                if (item != Items.AIR) {
+                    ModelLoader.setCustomModelResourceLocation(item, 0,
+                            new ModelResourceLocation(Objects.requireNonNull(block.getRegistryName()), "inventory"));
+                }
             }
         });
+
         META_BLOCKS.forEach((block, item) -> {
             if (block instanceof BlockStrippedOldLog) {
-                for (int i = 0; i < 4; i++) {
-                    ModelLoader.setCustomModelResourceLocation(
-                            item,
-                            i,
-                            new ModelResourceLocation(Objects.requireNonNull(block.getRegistryName()), "inventory")
-                    );
+                String[] types = {"oak", "spruce", "birch", "jungle"};
+                for (int i = 0; i < types.length; i++) {
+                    ModelLoader.setCustomModelResourceLocation(item, i,
+                            new ModelResourceLocation(block.getRegistryName(), "axis=y,variant=" + types[i]));
                 }
             }
             else if (block instanceof BlockStrippedNewLog) {
-                for (int i = 0; i < 2; i++) {
-                    ModelLoader.setCustomModelResourceLocation(
-                            item,
-                            i,
-                            new ModelResourceLocation(Objects.requireNonNull(block.getRegistryName()), "inventory")
-                    );
+                String[] types = {"acacia", "dark_oak"};
+                for (int i = 0; i < types.length; i++) {
+                    ModelLoader.setCustomModelResourceLocation(item, i,
+                            new ModelResourceLocation(block.getRegistryName(), "axis=y,variant=" + types[i]));
                 }
             }
         });

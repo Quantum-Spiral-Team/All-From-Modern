@@ -1,0 +1,11 @@
+{
+  "parent": "item/generated",
+  "variants": {
+    "inventory": [
+      { "model": "afm:block/stripped_oak_log", "predicate": { "meta": 0 } },
+      { "model": "afm:block/stripped_spruce_log", "predicate": { "meta": 1 } },
+      { "model": "afm:block/stripped_birch_log", "predicate": { "meta": 2 } },
+      { "model": "afm:block/stripped_jungle_log", "predicate": { "meta": 3 } }
+    ]
+  }
+}

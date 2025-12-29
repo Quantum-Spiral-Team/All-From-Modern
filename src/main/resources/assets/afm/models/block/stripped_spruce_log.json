@@ -1,0 +1,4 @@
+{
+  "parent": "block/cube_column",
+  "textures": { "end": "afm:blocks/stripped_spruce_log_top", "side": "afm:blocks/stripped_spruce_log" }
+}
