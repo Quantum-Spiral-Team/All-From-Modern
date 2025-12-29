@@ -16,6 +16,8 @@
     - [x] - Prismarine stairs and slabs
     - [ ] - Seagrass
     - [ ] - Stripped logs and wood
+        - [x] - Logs
+        - [ ] - Wood
     - [ ] - Turtle eggs
 - [ ] - Items
     - [ ] - Arrow and potions of Slow Falling and Turtle Master
