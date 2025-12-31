@@ -5,5 +5,14 @@
       "afm:block/pumpkin/carve1",
       "afm:block/pumpkin/carve2"
     ]
+  },
+  "item.axe.strip": {
+    "category": "block",
+    "sounds": [
+      "afm:item/axe/strip1",
+      "afm:item/axe/strip2",
+      "afm:item/axe/strip3",
+      "afm:item/axe/strip4"
+    ]
   }
 }

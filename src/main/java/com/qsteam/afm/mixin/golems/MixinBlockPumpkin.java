@@ -1,7 +1,7 @@
 package com.qsteam.afm.mixin.golems;
 
 import com.qsteam.afm.block.AFMBlocks;
-import com.qsteam.afm.handler.SoundsHandler;
+import com.qsteam.afm.handler.SoundHandler;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.BlockPumpkin;
 import net.minecraft.block.material.MapColor;
@@ -40,7 +40,7 @@ public abstract class MixinBlockPumpkin extends BlockHorizontal {
                 pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
                 new ItemStack(Items.PUMPKIN_SEEDS, 4)));
         worldIn.playSound(null, pos,
-                SoundsHandler.BLOCK_PUMPKIN_CARVE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                SoundHandler.BLOCK_PUMPKIN_CARVE, SoundCategory.BLOCKS, 1.0F, 1.0F);
         playerIn.getHeldItem(EnumHand.MAIN_HAND).damageItem(1, playerIn);
         return true;
     }
