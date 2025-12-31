@@ -15,7 +15,6 @@ public class CommonProxy {
 
     public void init(FMLInitializationEvent event) {
         OreDictHandler.registerOreDictAFMPlanks();
-        RecipeHandler.removeRecipes();
     }
 
     public void postInit(FMLPostInitializationEvent event) {}
