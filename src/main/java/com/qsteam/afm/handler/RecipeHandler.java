@@ -1,6 +1,7 @@
 package com.qsteam.afm.handler;
 
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -30,10 +31,22 @@ public class RecipeHandler {
         ShapedOreRecipe woodenPressurePlate = new ShapedOreRecipe(
                 woodenPressurePlateLocation,
                 Blocks.WOODEN_PRESSURE_PLATE,
+                "PP",
                 'P', "afmPlanks"
         );
         woodenPressurePlate.setRegistryName(woodenPressurePlateLocation);
         registry.register(woodenPressurePlate);
+
+        ResourceLocation woodenTrapdoorLocation = new ResourceLocation("minecraft", "trapdoor");
+        ShapedOreRecipe woodenTrapdoor = new ShapedOreRecipe(
+                woodenTrapdoorLocation,
+                new ItemStack(Blocks.TRAPDOOR, 2),
+                "PPP",
+                "PPP",
+                'P', "afmPlanks"
+        );
+        woodenTrapdoor.setRegistryName(woodenTrapdoorLocation);
+        registry.register(woodenTrapdoor);
     }
 
 }
