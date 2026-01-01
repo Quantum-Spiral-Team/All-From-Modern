@@ -48,11 +48,11 @@ public class EventHandler {
         } else if (block.equals(AFMBlocks.WOOD)) {
             BlockPlanks.EnumType type = state.getValue(BlockOldWood.VARIANT);
             newState = AFMBlocks.STRIPPED_WOOD.getDefaultState()
-                    .withProperty(BlockStrippedNewLog.VARIANT, type);
+                    .withProperty(BlockStrippedOldWood.VARIANT, type);
         } else if (block.equals(AFMBlocks.WOOD2)) {
             BlockPlanks.EnumType type = state.getValue(BlockNewWood.VARIANT);
             newState = AFMBlocks.STRIPPED_WOOD2.getDefaultState()
-                    .withProperty(BlockStrippedNewLog.VARIANT, type);
+                    .withProperty(BlockStrippedNewWood.VARIANT, type);
         }
 
         if (newState != null) {
