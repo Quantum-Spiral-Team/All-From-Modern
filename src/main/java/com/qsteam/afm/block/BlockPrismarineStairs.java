@@ -22,7 +22,6 @@ public class BlockPrismarineStairs extends BlockStairs {
         setSoundType(SoundType.STONE);
         setCreativeTab(AllFromModern.AFM_TAB);
         setTranslationKey("prismarine_stairs_" + variant.getTranslationKey());
-        setLightOpacity(0);
     }
 
     @Override

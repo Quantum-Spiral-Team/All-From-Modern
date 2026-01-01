@@ -1,6 +1,6 @@
 package com.qsteam.afm.block;
 
-import com.qsteam.afm.block.base.BlockBase;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -11,17 +11,22 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
+import static com.qsteam.afm.AllFromModern.AFM_TAB;
+
 @SuppressWarnings("deprecation")
-public class BlockNewWood extends BlockBase {
+public class BlockNewWood extends Block {
 
     public static final PropertyEnum<BlockPlanks.EnumType> VARIANT = PropertyEnum.create("variant", BlockPlanks.EnumType.class,
             type -> type.getMetadata() >= 4);
 
     public BlockNewWood() {
-        super("wood2", Material.WOOD, SoundType.WOOD);
+        super(Material.WOOD);
+        setRegistryName("wood2");
         setTranslationKey("wood_block");
+        setSoundType(SoundType.WOOD);
         setHardness(2.0F);
         setResistance(5.0F);
+        setCreativeTab(AFM_TAB);
 
         setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, BlockPlanks.EnumType.ACACIA));
     }

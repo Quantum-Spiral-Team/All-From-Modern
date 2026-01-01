@@ -1,6 +1,6 @@
 package com.qsteam.afm.block;
 
-import com.qsteam.afm.block.base.BlockBase;
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -10,13 +10,18 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockBlueIce extends BlockBase {
+import static com.qsteam.afm.AllFromModern.AFM_TAB;
+
+public class BlockBlueIce extends Block {
 
     public BlockBlueIce() {
-        super("blue_ice", Material.ICE);
+        super(Material.ICE);
+        setRegistryName("blue_ice");
+        setTranslationKey("blue_ice");
         setResistance(2.8F);
         setHardness(2.8F);
         setSoundType(SoundType.GLASS);
+        setCreativeTab(AFM_TAB);
     }
 
     @Override
