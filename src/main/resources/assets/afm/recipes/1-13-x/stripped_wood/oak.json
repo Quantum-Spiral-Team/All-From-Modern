@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "afm:stripped_log",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "afm:stripped_wood",
+    "data": 0,
+    "count": 3
+  }
+}

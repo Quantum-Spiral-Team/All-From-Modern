@@ -1,6 +1,6 @@
 {
   "variants": {
-    "powered=false": { "model": "afm:birch_pressure_plate_up" },
-    "powered=true": { "model": "afm:birch_pressure_plate_down" }
+    "powered=false": { "model": "afm:pressure_plates/birch_pressure_plate_up" },
+    "powered=true": { "model": "afm:pressure_plates/birch_pressure_plate_down" }
   }
 }

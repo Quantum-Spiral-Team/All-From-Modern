@@ -1,12 +1,12 @@
 {
   "variants": {
-    "axis=y,variant=acacia": { "model": "afm:stripped_acacia_log" },
-    "axis=x,variant=acacia": { "model": "afm:stripped_acacia_log", "x": 90, "y": 90 },
-    "axis=z,variant=acacia": { "model": "afm:stripped_acacia_log", "x": 90 },
-    "axis=none,variant=acacia": { "model": "afm:stripped_acacia_wood" },
-    "axis=y,variant=dark_oak": { "model": "afm:stripped_dark_oak_log" },
-    "axis=x,variant=dark_oak": { "model": "afm:stripped_dark_oak_log", "x": 90, "y": 90 },
-    "axis=z,variant=dark_oak": { "model": "afm:stripped_dark_oak_log", "x": 90 },
-    "axis=none,variant=dark_oak": { "model": "afm:stripped_dark_oak_wood" }
+    "axis=y,variant=acacia": { "model": "afm:stripped_wood/stripped_acacia_log" },
+    "axis=x,variant=acacia": { "model": "afm:stripped_wood/stripped_acacia_log", "x": 90, "y": 90 },
+    "axis=z,variant=acacia": { "model": "afm:stripped_wood/stripped_acacia_log", "x": 90 },
+    "axis=none,variant=acacia": { "model": "afm:stripped_wood/stripped_acacia_wood" },
+    "axis=y,variant=dark_oak": { "model": "afm:stripped_wood/stripped_dark_oak_log" },
+    "axis=x,variant=dark_oak": { "model": "afm:stripped_wood/stripped_dark_oak_log", "x": 90, "y": 90 },
+    "axis=z,variant=dark_oak": { "model": "afm:stripped_wood/stripped_dark_oak_log", "x": 90 },
+    "axis=none,variant=dark_oak": { "model": "afm:stripped_wood/stripped_dark_oak_wood" }
   }
 }

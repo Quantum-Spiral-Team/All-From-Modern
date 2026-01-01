@@ -1,6 +1,6 @@
 {
   "variants": {
-    "powered=false": { "model": "afm:spruce_pressure_plate_up" },
-    "powered=true": { "model": "afm:spruce_pressure_plate_down" }
+    "powered=false": { "model": "afm:pressure_plates/spruce_pressure_plate_up" },
+    "powered=true": { "model": "afm:pressure_plates/spruce_pressure_plate_down" }
   }
 }

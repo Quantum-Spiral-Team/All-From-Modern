@@ -1,5 +1,5 @@
 {
     "variants": {
-        "variant=default": { "model": "afm:prismarine_double_slab" }
+        "variant=default": { "model": "afm:prismarine/prismarine_double_slab" }
     }
 }

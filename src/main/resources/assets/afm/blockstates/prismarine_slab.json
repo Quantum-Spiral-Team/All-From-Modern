@@ -1,6 +1,6 @@
 {
     "variants": {
-        "half=bottom,variant=default": { "model": "afm:prismarine_half_slab" },
-        "half=top,variant=default": { "model": "afm:prismarine_upper_slab" }
+        "half=bottom,variant=default": { "model": "afm:prismarine/prismarine_half_slab" },
+        "half=top,variant=default": { "model": "afm:prismarine/prismarine_upper_slab" }
     }
 }
