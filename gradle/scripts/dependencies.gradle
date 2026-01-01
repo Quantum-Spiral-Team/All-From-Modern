@@ -73,7 +73,11 @@ dependencies {
     implementation ("com.cleanroommc:modularui:3.0.6") {transitive = false}
     implementation ("com.cleanroommc:groovyscript:1.3.3") {transitive = false}
     implementation rfg.deobf("curse.maven:nether-api-1306115:7216794")
-    implementation "curse.maven:the-one-probe-245211:2667280"
-    implementation "curse.maven:top-addons-247111:2887479"
+    implementation rfg.deobf("curse.maven:the-one-probe-245211:2667280")
+    implementation rfg.deobf("curse.maven:top-addons-247111:2887479")
+
+    // fix lightning bugs
+    runtimeOnly rfg.deobf(files("libs/Alfheim-1.6.jar"))
+    runtimeOnly rfg.deobf(files("libs/!Red-Core-MC-1.8-1.12-0.7.jar"))
 
 }
