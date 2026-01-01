@@ -30,6 +30,9 @@ public class AFMBlocks {
     public static final Block CARVED_PUMPKIN = getBlockFromRegistry("carved_pumpkin");
     public static final Block STRIPPED_LOG = getBlockFromRegistry("stripped_log");
     public static final Block STRIPPED_LOG2 = getBlockFromRegistry("stripped_log2");
-
+    public static final Block WOOD = getBlockFromRegistry("wood");
+    public static final Block WOOD2 = getBlockFromRegistry("wood2");
+    public static final Block STRIPPED_WOOD = getBlockFromRegistry("stripped_wood");
+    public static final Block STRIPPED_WOOD2 = getBlockFromRegistry("stripped_wood2");
 
 }

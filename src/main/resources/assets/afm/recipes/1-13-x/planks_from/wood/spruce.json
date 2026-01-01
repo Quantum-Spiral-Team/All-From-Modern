@@ -1,0 +1,14 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "afm:wood",
+      "data": 1
+    }
+  ],
+  "result": {
+    "item": "minecraft:planks",
+    "data": 1,
+    "count": 4
+  }
+}

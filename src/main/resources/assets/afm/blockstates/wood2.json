@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "variant=acacia": { "model": "afm:wood/acacia_wood" },
+    "variant=dark_oak": { "model": "afm:wood/dark_oak_wood" }
+  }
+}

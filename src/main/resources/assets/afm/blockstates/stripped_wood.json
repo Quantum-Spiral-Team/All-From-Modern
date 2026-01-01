@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "variant=oak": { "model": "afm:stripped_wood/stripped_oak_wood" },
+    "variant=spruce": { "model": "afm:stripped_wood/stripped_spruce_wood" },
+    "variant=birch": { "model": "afm:stripped_wood/stripped_birch_wood" },
+    "variant=jungle": { "model": "afm:stripped_wood/stripped_jungle_wood" }
+  }
+}

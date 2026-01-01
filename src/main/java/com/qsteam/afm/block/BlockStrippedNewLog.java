@@ -24,7 +24,7 @@ public class BlockStrippedNewLog extends BlockLog {
     public BlockStrippedNewLog() {
         super();
         setRegistryName("stripped_log2");
-        setTranslationKey("stripped_log2");
+        setTranslationKey("stripped_log");
         setHardness(2.0F);
         setResistance(5.0F);
         setSoundType(SoundType.WOOD);

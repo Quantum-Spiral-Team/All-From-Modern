@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "variant=oak": { "model": "afm:wood/oak_wood" },
+    "variant=spruce": { "model": "afm:wood/spruce_wood" },
+    "variant=birch": { "model": "afm:wood/birch_wood" },
+    "variant=jungle": { "model": "afm:wood/jungle_wood" }
+  }
+}

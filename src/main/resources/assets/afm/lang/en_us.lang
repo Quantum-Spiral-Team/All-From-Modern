@@ -26,8 +26,20 @@ tile.stripped_log.oak.name=Stripped Oak Log
 tile.stripped_log.spruce.name=Stripped Spruce Log
 tile.stripped_log.birch.name=Stripped Birch Log
 tile.stripped_log.jungle.name=Stripped Jungle Log
-tile.stripped_log2.acacia.name=Stripped Acacia Log
-tile.stripped_log2.dark_oak.name=Stripped Dark Oak Log
+tile.stripped_log.acacia.name=Stripped Acacia Log
+tile.stripped_log.dark_oak.name=Stripped Dark Oak Log
+tile.wood_block.oak.name=Oak Wood
+tile.wood_block.spruce.name=Spruce Wood
+tile.wood_block.birch.name=Birch Wood
+tile.wood_block.jungle.name=Jungle Wood
+tile.wood_block.acacia.name=Acacia Wood
+tile.wood_block.dark_oak.name=Dark Oak Wood
+tile.stripped_wood.oak.name=Stripped Oak Wood
+tile.stripped_wood.spruce.name=Stripped Spruce Wood
+tile.stripped_wood.birch.name=Stripped Birch Wood
+tile.stripped_wood.jungle.name=Stripped Jungle Wood
+tile.stripped_wood.acacia.name=Stripped Acacia Wood
+tile.stripped_wood.dark_oak.name=Stripped Dark Oak Wood
 
 # Items
 

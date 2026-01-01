@@ -3,10 +3,10 @@ package com.qsteam.afm.handler;
 import com.qsteam.afm.block.*;
 import com.qsteam.afm.block.BlockPrismarineSlab;
 import com.qsteam.afm.block.BlockPrismarineStairs;
-import com.qsteam.afm.item.itemblock.ItemBlockStrippedLog;
+import com.qsteam.afm.item.itemblock.ItemBlockWooden;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockPrismarine;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -32,7 +32,9 @@ public class BlockHandler {
 
     static {
         List<Block> blocks = new ArrayList<>();
+
         blocks.add(new BlockBlueIce());
+
         addWoodenBlocks(blocks, BlockWoodenButton::new);
         addWoodenBlocks(blocks, BlockWoodenPressurePlate::new);
         addWoodenBlocks(blocks, BlockWoodenTrapdoor::new);
@@ -52,11 +54,19 @@ public class BlockHandler {
         }
         BLOCKS = Collections.unmodifiableList(blocks);
 
-        Map<Block, ItemBlock> metaBlocks = new HashMap<>();
-        BlockStrippedNewLog strippedNewLog = new BlockStrippedNewLog();
-        metaBlocks.put(strippedNewLog, new ItemBlockStrippedLog(strippedNewLog));
+        Map<Block, ItemBlock> metaBlocks = new LinkedHashMap<>();
         BlockStrippedOldLog strippedOldLog = new BlockStrippedOldLog();
-        metaBlocks.put(strippedOldLog, new ItemBlockStrippedLog(strippedOldLog));
+        metaBlocks.put(strippedOldLog, new ItemBlockWooden(strippedOldLog));
+        BlockStrippedNewLog strippedNewLog = new BlockStrippedNewLog();
+        metaBlocks.put(strippedNewLog, new ItemBlockWooden(strippedNewLog));
+        BlockOldWood oldWood = new BlockOldWood();
+        metaBlocks.put(oldWood, new ItemBlockWooden(oldWood));
+        BlockNewWood blockNewWood = new BlockNewWood();
+        metaBlocks.put(blockNewWood, new ItemBlockWooden(blockNewWood));
+        BlockStrippedOldWood strippedOldWood = new BlockStrippedOldWood();
+        metaBlocks.put(strippedOldWood, new ItemBlockWooden(strippedOldWood));
+        BlockStrippedNewWood strippedNewWood = new BlockStrippedNewWood();
+        metaBlocks.put(strippedNewWood, new ItemBlockWooden(strippedNewWood));
         META_BLOCKS = metaBlocks;
     }
 
@@ -113,18 +123,18 @@ public class BlockHandler {
         });
 
         META_BLOCKS.forEach((block, item) -> {
-            if (block instanceof BlockStrippedOldLog) {
+            if (block instanceof BlockStrippedOldLog || block instanceof BlockOldWood || block instanceof BlockStrippedOldWood) {
                 String[] types = {"oak", "spruce", "birch", "jungle"};
                 for (int i = 0; i < types.length; i++) {
                     ModelLoader.setCustomModelResourceLocation(item, i,
-                            new ModelResourceLocation(block.getRegistryName(), "axis=y,variant=" + types[i]));
+                            new ModelResourceLocation(Objects.requireNonNull(block.getRegistryName()), (block instanceof BlockLog ? "axis=y,variant=" : "variant=") + types[i]));
                 }
             }
-            else if (block instanceof BlockStrippedNewLog) {
+            else if (block instanceof BlockStrippedNewLog || block instanceof BlockNewWood || block instanceof BlockStrippedNewWood) {
                 String[] types = {"acacia", "dark_oak"};
                 for (int i = 0; i < types.length; i++) {
                     ModelLoader.setCustomModelResourceLocation(item, i,
-                            new ModelResourceLocation(block.getRegistryName(), "axis=y,variant=" + types[i]));
+                            new ModelResourceLocation(Objects.requireNonNull(block.getRegistryName()), (block instanceof BlockLog ? "axis=y,variant=" : "variant=") + types[i]));
                 }
             }
         });

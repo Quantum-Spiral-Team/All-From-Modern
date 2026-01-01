@@ -1,16 +1,22 @@
 package com.qsteam.afm.block.base;
 
-import com.qsteam.afm.AllFromModern;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+
+import static com.qsteam.afm.AllFromModern.AFM_TAB;
 
 public class BlockBase extends Block {
 
     public BlockBase(String name, Material material) {
         super(material);
-        setCreativeTab(AllFromModern.AFM_TAB);
+        setCreativeTab(AFM_TAB);
         setRegistryName(name);
-        setTranslationKey(name);
+    }
+
+    public BlockBase(String name, Material material, SoundType sound) {
+        this(name, material);
+        setSoundType(sound);
     }
 
 }

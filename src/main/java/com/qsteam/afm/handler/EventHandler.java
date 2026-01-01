@@ -1,8 +1,6 @@
 package com.qsteam.afm.handler;
 
-import com.qsteam.afm.block.AFMBlocks;
-import com.qsteam.afm.block.BlockStrippedNewLog;
-import com.qsteam.afm.block.BlockStrippedOldLog;
+import com.qsteam.afm.block.*;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -47,6 +45,14 @@ public class EventHandler {
             newState = AFMBlocks.STRIPPED_LOG2.getDefaultState()
                     .withProperty(BlockStrippedNewLog.VARIANT, type)
                     .withProperty(BlockLog.LOG_AXIS, axis);
+        } else if (block.equals(AFMBlocks.WOOD)) {
+            BlockPlanks.EnumType type = state.getValue(BlockOldWood.VARIANT);
+            newState = AFMBlocks.STRIPPED_WOOD.getDefaultState()
+                    .withProperty(BlockStrippedNewLog.VARIANT, type);
+        } else if (block.equals(AFMBlocks.WOOD2)) {
+            BlockPlanks.EnumType type = state.getValue(BlockNewWood.VARIANT);
+            newState = AFMBlocks.STRIPPED_WOOD2.getDefaultState()
+                    .withProperty(BlockStrippedNewLog.VARIANT, type);
         }
 
         if (newState != null) {

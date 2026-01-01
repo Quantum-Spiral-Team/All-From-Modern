@@ -1,5 +1,6 @@
 package com.qsteam.afm.item.itemblock;
 
+import com.qsteam.afm.block.BlockNewWood;
 import com.qsteam.afm.block.BlockStrippedNewLog;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPlanks;
@@ -9,10 +10,10 @@ import net.minecraft.item.ItemStack;
 
 import static com.qsteam.afm.AllFromModern.AFM_TAB;
 
-public class ItemBlockStrippedLog extends ItemMultiTexture {
+public class ItemBlockWooden extends ItemMultiTexture {
 
-    public ItemBlockStrippedLog(Block block) {
-        super(block, block, ItemBlockStrippedLog::getVariantName);
+    public ItemBlockWooden(Block block) {
+        super(block, block, ItemBlockWooden::getVariantName);
         setHasSubtypes(true);
         setCreativeTab(AFM_TAB);
     }
@@ -22,7 +23,7 @@ public class ItemBlockStrippedLog extends ItemMultiTexture {
         Block block = ((ItemBlock)stack.getItem()).getBlock();
 
         int enumIndex;
-        if (block instanceof BlockStrippedNewLog) {
+        if (block instanceof BlockStrippedNewLog ||  block instanceof BlockNewWood) {
             enumIndex = meta + 4;
         } else {
             enumIndex = meta;
@@ -33,7 +34,7 @@ public class ItemBlockStrippedLog extends ItemMultiTexture {
 
     @Override
     public String getTranslationKey(ItemStack stack) {
-        return super.getTranslationKey(stack)/* + "." + getVariantName(stack)*/;
+        return super.getTranslationKey(stack);
     }
 
 }
