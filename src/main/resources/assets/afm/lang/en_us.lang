@@ -43,6 +43,17 @@ tile.stripped_wood.dark_oak.name=Stripped Dark Oak Wood
 
 # Items
 
+# Effects
+effect.slow_falling=Slow Falling
+
+# Potions
+potion.effect.slow_falling=Potion of Slow Falling
+potion.effect.long_slow_falling=Potion of Slow Falling
+splash_potion.effect.slow_falling=Splash Potion of Slow Falling
+lingering_potion.effect.slow_falling=Lingering Potion of Slow Falling
+
+# Tipped Arrows
+tipped_arrow.effect.slow_falling=Arrow of Slow Falling
 
 # Creative Tabs
 itemGroup.afm=All From Modern
