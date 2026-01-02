@@ -28,11 +28,11 @@
     - [ ] - Heart of the sea and Nautilus shells
     - [ ] - Mushroom blocks and stems (to CreativeTab)
     - [ ] - Petrified oak slab (Easter eggs)
-    - [ ] - Phantom membranes
-    - [ ] - Scutes
+    - [x] - Phantom membranes
+    - [x] - Scutes
     - [ ] - Smooth quartz
     - [ ] - Trident (weapon)
-    - [ ] - Turtle shells
+    - [x] - Turtle shells
     - [x] - Wood blocks
 - [ ] Mobs
     - [ ] - Dolphin
