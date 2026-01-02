@@ -20,7 +20,7 @@
         - [x] - Wood
     - [ ] - Turtle eggs
 - [ ] - Items
-    - [ ] - Arrow and potions of Slow Falling and Turtle Master
+    - [x] - Arrow and potions of Slow Falling and Turtle Master
     - [ ] - Buried treasure exploration maps
     - [ ] - Dried kelp
     - [ ] - Debug stick (*maybe*)
