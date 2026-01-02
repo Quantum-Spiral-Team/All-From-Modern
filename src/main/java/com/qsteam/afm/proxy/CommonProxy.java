@@ -1,6 +1,7 @@
 package com.qsteam.afm.proxy;
 
 import com.qsteam.afm.handler.BlockHandler;
+import com.qsteam.afm.handler.FlammableBlockHandler;
 import com.qsteam.afm.handler.FuelHandler;
 import com.qsteam.afm.handler.OreDictHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -18,6 +19,7 @@ public class CommonProxy {
     public void init(FMLInitializationEvent event) {
         OreDictHandler.registerOreDictAFMPlanks();
         GameRegistry.registerFuelHandler(new FuelHandler());
+        FlammableBlockHandler.register();
     }
 
     public void postInit(FMLPostInitializationEvent event) {}
