@@ -2,6 +2,7 @@ package com.qsteam.afm.handler;
 
 import com.qsteam.afm.potion.PotionSlowFalling;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
@@ -10,26 +11,48 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.util.Objects;
-
 @EventBusSubscriber
 public class PotionHandler {
 
     public static final Potion SLOW_FALLING = new PotionSlowFalling();
-    public static final PotionType SLOW_FALLING_TYPE = new PotionType("slow_falling", new PotionEffect(SLOW_FALLING, 3600));
-    public static final PotionType LONG_SLOW_FALLING_TYPE = new PotionType("slow_falling", new PotionEffect(SLOW_FALLING, 9600));
+    public static final PotionType SLOW_FALLING_TYPE = new PotionType("slow_falling", new PotionEffect(SLOW_FALLING, 3600)).setRegistryName("slow_falling");
+    public static final PotionType LONG_SLOW_FALLING_TYPE = new PotionType("slow_falling", new PotionEffect(SLOW_FALLING, 9600)).setRegistryName("long_slow_falling");
+
+    public static final PotionType TURTLE_MASTER_TYPE = new PotionType("turtle_master", new PotionEffect[] {
+            new PotionEffect(MobEffects.SLOWNESS, 400, 3),
+            new PotionEffect(MobEffects.RESISTANCE, 400, 2)
+    }).setRegistryName("turtle_master");
+    public static final PotionType LONG_TURTLE_MASTER_TYPE = new PotionType("turtle_master", new PotionEffect[] {
+            new PotionEffect(MobEffects.SLOWNESS, 800, 3),
+            new PotionEffect(MobEffects.RESISTANCE, 800, 2)
+    }).setRegistryName("long_turtle_master");
+    public static final PotionType STRONG_TURTLE_MASTER_TYPE = new PotionType("turtle_master", new PotionEffect[] {
+            new PotionEffect(MobEffects.SLOWNESS, 400, 5),
+            new PotionEffect(MobEffects.RESISTANCE, 400, 3)
+    }).setRegistryName("strong_turtle_master");
+
+
+    public static final Potion[] POTIONS = new Potion[]{
+            SLOW_FALLING
+    };
+
+    public static final PotionType[] POTION_TYPES = {
+            SLOW_FALLING_TYPE,
+            LONG_SLOW_FALLING_TYPE,
+            TURTLE_MASTER_TYPE,
+            LONG_TURTLE_MASTER_TYPE,
+            STRONG_TURTLE_MASTER_TYPE
+    };
+
 
     @SubscribeEvent
     public static void registerPotions(RegistryEvent.Register<Potion> event) {
-        event.getRegistry().register(SLOW_FALLING);
+        event.getRegistry().registerAll(POTIONS);
     }
 
     @SubscribeEvent
     public static void registerPotionTypes(RegistryEvent.Register<PotionType> event) {
-        event.getRegistry().registerAll(
-                SLOW_FALLING_TYPE.setRegistryName(Objects.requireNonNull(SLOW_FALLING.getRegistryName())),
-                LONG_SLOW_FALLING_TYPE.setRegistryName("long_" + SLOW_FALLING.getRegistryName())
-        );
+        event.getRegistry().registerAll(POTION_TYPES);
     }
 
     @SubscribeEvent

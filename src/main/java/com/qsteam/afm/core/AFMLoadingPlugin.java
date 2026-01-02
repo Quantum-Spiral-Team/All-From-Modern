@@ -16,7 +16,8 @@ public class AFMLoadingPlugin implements IFMLLoadingPlugin, IEarlyMixinLoader {
     private static final Map<String, BooleanSupplier> SERVER_MIXIN_CONFIGS = Collections.emptyMap();
 
     private static final Map<String, BooleanSupplier> COMMON_MIXIN_CONFIGS = ImmutableMap.of(
-            "mixins/mixins.afm.pumpkin.json", () -> true
+            "mixins/mixins.afm.pumpkin.json", () -> true,
+            "mixins/mixins.afm.potion.json", () -> true
     );
 
     @Override

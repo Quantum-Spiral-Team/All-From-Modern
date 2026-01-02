@@ -46,11 +46,22 @@ tile.stripped_wood.dark_oak.name=Stripped Dark Oak Wood
 # Effects
 effect.slow_falling=Slow Falling
 
+# Effect Potency
+potion.potency.2=III
+potion.potency.3=IV
+potion.potency.4=V
+potion.potency.5=VI
+
 # Potions
 potion.effect.slow_falling=Potion of Slow Falling
 potion.effect.long_slow_falling=Potion of Slow Falling
 splash_potion.effect.slow_falling=Splash Potion of Slow Falling
 lingering_potion.effect.slow_falling=Lingering Potion of Slow Falling
+potion.effect.turtle_master=Potion of the Turtle Master
+potion.effect.long_turtle_master=Potion of the Turtle Master
+potion.effect.strong_turtle_master=Potion of the Turtle Master
+splash_potion.effect.turtle_master=Splash Potion of the Turtle Master
+tipped_arrow.effect.turtle_master=Arrow of the Turtle Master
 
 # Tipped Arrows
 tipped_arrow.effect.slow_falling=Arrow of Slow Falling
