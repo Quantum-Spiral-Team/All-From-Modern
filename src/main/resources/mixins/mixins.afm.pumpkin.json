@@ -8,7 +8,8 @@
 	"mixins": [
 		"MixinBlockPumpkin",
 		"MixinEntityLiving",
-		"MixinGuiIngame"
+		"MixinGuiIngame",
+		"MixinEntityEnderman"
 	],
 	"server": [],
 	"client": [
