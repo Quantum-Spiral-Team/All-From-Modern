@@ -1,11 +1,13 @@
 package com.qsteam.afm.handler;
 
-import com.cleanroommc.groovyscript.compat.vanilla.ShapedCraftingRecipe;
 import com.qsteam.afm.block.AFMBlocks;
+import com.qsteam.afm.item.AFMItems;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.init.PotionTypes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraft.potion.PotionHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -20,7 +22,12 @@ public class RecipeHandler {
     @SubscribeEvent
     public static void onRegisterRecipes(RegistryEvent.Register<IRecipe> event) {
         IForgeRegistry<IRecipe> registry = event.getRegistry();
+        rewriteRecipes(registry);
+        addPotionRecipes();
 
+    }
+
+    private static void rewriteRecipes(IForgeRegistry<IRecipe> registry) {
         ResourceLocation woodenButtonLocation = new ResourceLocation("minecraft", "wooden_button");
         ShapelessOreRecipe woodenButton = new ShapelessOreRecipe(
                 woodenButtonLocation,
@@ -62,6 +69,15 @@ public class RecipeHandler {
         );
         litPumpkin.setRegistryName(litPumpkinLocation);
         registry.register(litPumpkin);
+    }
+
+    private static void addPotionRecipes() {
+        PotionHelper.addMix(PotionTypes.AWKWARD, AFMItems.PHANTOM_MEMBRANE, PotionHandler.SLOW_FALLING_TYPE);
+        PotionHelper.addMix(PotionHandler.SLOW_FALLING_TYPE, Items.REDSTONE, PotionHandler.LONG_SLOW_FALLING_TYPE);
+
+        PotionHelper.addMix(PotionTypes.AWKWARD, AFMItems.TURTLE_HELMET, PotionHandler.TURTLE_MASTER_TYPE);
+        PotionHelper.addMix(PotionHandler.TURTLE_MASTER_TYPE, Items.REDSTONE, PotionHandler.LONG_TURTLE_MASTER_TYPE);
+        PotionHelper.addMix(PotionHandler.TURTLE_MASTER_TYPE, Items.GLOWSTONE_DUST, PotionHandler.STRONG_TURTLE_MASTER_TYPE);
     }
 
 }

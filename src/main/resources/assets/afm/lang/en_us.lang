@@ -42,6 +42,9 @@ tile.stripped_wood.acacia.name=Stripped Acacia Wood
 tile.stripped_wood.dark_oak.name=Stripped Dark Oak Wood
 
 # Items
+item.turtle_scute.name=Turtle Scute
+item.turtle_helmet.name=Turtle Shell
+item.phantom_membrane.name=Phantom Membrane
 
 # Effects
 effect.slow_falling=Slow Falling
