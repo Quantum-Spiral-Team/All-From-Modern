@@ -12,6 +12,7 @@
 	],
 	"server": [],
 	"client": [
-		"MixinLayerSnowmanHead"
+		"MixinLayerSnowmanHead",
+		"GuiIngameAccessor"
 	]
 }

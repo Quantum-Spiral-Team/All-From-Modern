@@ -1,14 +1,17 @@
 package com.qsteam.afm.handler;
 
+import com.qsteam.afm.AllFromModern;
 import com.qsteam.afm.block.*;
 import com.qsteam.afm.block.BlockPrismarineSlab;
 import com.qsteam.afm.block.BlockPrismarineStairs;
 import com.qsteam.afm.item.itemblock.ItemBlockWooden;
+import com.qsteam.afm.mixin.pumpkin.GuiIngameAccessor;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockPrismarine;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -27,6 +30,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.lang.reflect.Method;
 import java.util.*;
 import java.util.function.Function;
 
@@ -101,26 +105,7 @@ public class BlockHandler {
                 @Override
                 @SideOnly(Side.CLIENT)
                 public void renderHelmetOverlay(ItemStack stack, EntityPlayer player, ScaledResolution resolution, float partialTicks) {
-                    // Отключаем тест глубины и запись в буфер глубины, чтобы оверлей был поверх всего
-                    GlStateManager.disableDepth();
-                    GlStateManager.depthMask(false);
-
-                    // Настройка смешивания (блиндинга) для прозрачности
-                    GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-                    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-                    GlStateManager.disableAlpha();
-
-                    // Привязываем текстуру
-                    Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("minecraft", "textures/misc/pumpkinblur.png"));
-
-                    // Рисуем текстуру на весь экран
-                    Gui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, resolution.getScaledWidth(), resolution.getScaledHeight(), resolution.getScaledWidth(), resolution.getScaledHeight());
-
-                    // Возвращаем настройки рендера в исходное состояние
-                    GlStateManager.depthMask(true);
-                    GlStateManager.enableDepth();
-                    GlStateManager.enableAlpha();
-                    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                    ((GuiIngameAccessor) Minecraft.getMinecraft().ingameGUI).invokeRenderPumpkinOverlay(resolution);
                 }
             }.setRegistryName(Objects.requireNonNull(block.getRegistryName())));
         } else if (block instanceof BlockPrismarineSlab.Half) {
