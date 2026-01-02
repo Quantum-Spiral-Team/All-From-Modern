@@ -20,6 +20,8 @@ import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.entity.Entity;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
@@ -161,7 +163,5 @@ public class BlockCarvedPumpkin extends BlockHorizontal {
             }
         }
     }
-
-
 
 }

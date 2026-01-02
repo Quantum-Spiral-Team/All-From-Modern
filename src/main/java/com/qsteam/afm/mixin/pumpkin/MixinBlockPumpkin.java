@@ -1,4 +1,4 @@
-package com.qsteam.afm.mixin.golems;
+package com.qsteam.afm.mixin.pumpkin;
 
 import com.qsteam.afm.block.AFMBlocks;
 import com.qsteam.afm.handler.SoundHandler;

@@ -7,12 +7,21 @@ import com.qsteam.afm.item.itemblock.ItemBlockWooden;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockPrismarine;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSlab;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
@@ -82,7 +91,39 @@ public class BlockHandler {
 
     private static void registerBlock(Block block) {
         registerBlockWithoutItem(block);
-        if (block instanceof BlockPrismarineSlab.Half) {
+        if (block instanceof BlockCarvedPumpkin) {
+            ForgeRegistries.ITEMS.register(new ItemBlock(block) {
+                @Override
+                public boolean isValidArmor(ItemStack stack, EntityEquipmentSlot armorType, Entity entity) {
+                    return armorType == EntityEquipmentSlot.HEAD;
+                }
+
+                @Override
+                @SideOnly(Side.CLIENT)
+                public void renderHelmetOverlay(ItemStack stack, EntityPlayer player, ScaledResolution resolution, float partialTicks) {
+                    // Отключаем тест глубины и запись в буфер глубины, чтобы оверлей был поверх всего
+                    GlStateManager.disableDepth();
+                    GlStateManager.depthMask(false);
+
+                    // Настройка смешивания (блиндинга) для прозрачности
+                    GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+                    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                    GlStateManager.disableAlpha();
+
+                    // Привязываем текстуру
+                    Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("minecraft", "textures/misc/pumpkinblur.png"));
+
+                    // Рисуем текстуру на весь экран
+                    Gui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, resolution.getScaledWidth(), resolution.getScaledHeight(), resolution.getScaledWidth(), resolution.getScaledHeight());
+
+                    // Возвращаем настройки рендера в исходное состояние
+                    GlStateManager.depthMask(true);
+                    GlStateManager.enableDepth();
+                    GlStateManager.enableAlpha();
+                    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                }
+            }.setRegistryName(Objects.requireNonNull(block.getRegistryName())));
+        } else if (block instanceof BlockPrismarineSlab.Half) {
             for (SlabPair pair : SLAB_PAIRS) {
                 if (pair.half == block) {
                     ForgeRegistries.ITEMS.register(new ItemSlab(pair.half, pair.half, pair.doubleSlab)
