@@ -5,6 +5,8 @@ import com.qsteam.afm.AllFromModern;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
@@ -36,11 +38,12 @@ public class BlockCarvedPumpkin extends BlockHorizontal {
     private final BlockPattern golemPattern;
 
     public BlockCarvedPumpkin() {
-        super(Material.WOOD);
+        super(Material.GOURD, MapColor.ADOBE);
         setCreativeTab(AllFromModern.AFM_TAB);
         setRegistryName("carved_pumpkin");
         setTranslationKey("carved_pumpkin");
         setHardness(1.0F);
+        setSoundType(SoundType.WOOD);
         setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         
         this.snowmanPattern = FactoryBlockPattern.start()
