@@ -1,8 +1,11 @@
 package com.qsteam.afm.handler;
 
+import com.cleanroommc.groovyscript.compat.vanilla.ShapedCraftingRecipe;
+import com.qsteam.afm.block.AFMBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -47,6 +50,18 @@ public class RecipeHandler {
         );
         woodenTrapdoor.setRegistryName(woodenTrapdoorLocation);
         registry.register(woodenTrapdoor);
+
+        ResourceLocation litPumpkinLocation = new ResourceLocation("minecraft", "lit_pumpkin");
+        ShapedOreRecipe litPumpkin = new ShapedOreRecipe(
+                litPumpkinLocation,
+                Blocks.LIT_PUMPKIN,
+                "P",
+                "T",
+                'P', AFMBlocks.CARVED_PUMPKIN,
+                'T', Blocks.TORCH
+        );
+        litPumpkin.setRegistryName(litPumpkinLocation);
+        registry.register(litPumpkin);
     }
 
 }
