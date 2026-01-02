@@ -8,6 +8,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 @SuppressWarnings("deprecation")
 public class PotionBase extends Potion {
@@ -41,10 +42,12 @@ public class PotionBase extends Potion {
     private void renderIcon(int x, int y, Minecraft mc) {
         mc.getTextureManager().bindTexture(POTION_ATLAS);
 
-        int u = this.iconIndexX * 18;
-        int v = this.iconIndexY * 18;
+        int width = GL11.glGetTexLevelParameteri(GL11.GL_TEXTURE_2D, 0, GL11.GL_TEXTURE_WIDTH);
+        int height = GL11.glGetTexLevelParameteri(GL11.GL_TEXTURE_2D, 0, GL11.GL_TEXTURE_HEIGHT);
 
-        Gui.drawModalRectWithCustomSizedTexture(x, y, (float)u, (float)v, 18, 18, 256, 256);
+        Gui.drawModalRectWithCustomSizedTexture(x, y,
+                (float)(this.iconIndexX * 18), (float)(this.iconIndexY * 18),
+                18, 18, (float)width, (float)height);
     }
 
 }
