@@ -1,6 +1,6 @@
 package com.qsteam.afm.mixin.pumpkin;
 
-import com.qsteam.afm.block.AFMBlocks;
+import com.qsteam.afm.handler.RegistryHandler;
 import com.qsteam.afm.handler.SoundHandler;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.BlockPumpkin;
@@ -35,7 +35,7 @@ public abstract class MixinBlockPumpkin extends BlockHorizontal {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (worldIn.isRemote || !playerIn.getHeldItem(EnumHand.MAIN_HAND).getItem().equals(Items.SHEARS)) return false;
-        worldIn.setBlockState(pos, AFMBlocks.CARVED_PUMPKIN.getDefaultState().withProperty(FACING, worldIn.getBlockState(pos).getValue(BlockHorizontal.FACING)));
+        worldIn.setBlockState(pos, RegistryHandler.CARVED_PUMPKIN.getDefaultState().withProperty(FACING, worldIn.getBlockState(pos).getValue(BlockHorizontal.FACING)));
         worldIn.spawnEntity(new EntityItem(worldIn,
                 pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
                 new ItemStack(Items.PUMPKIN_SEEDS, 4)));

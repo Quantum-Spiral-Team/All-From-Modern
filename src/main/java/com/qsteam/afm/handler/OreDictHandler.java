@@ -8,6 +8,7 @@ import net.minecraftforge.oredict.OreDictionary;
 public class OreDictHandler {
 
     public static void registerOreDictAFMPlanks() {
+
         OreDictionary.registerOre("afmPlanks", new ItemStack(Blocks.PLANKS, 1, 0));
         Item vanillaPlanks = Item.getItemFromBlock(Blocks.PLANKS);
         for (ItemStack stack : OreDictionary.getOres("plankWood")) {
@@ -15,5 +16,8 @@ public class OreDictHandler {
                 OreDictionary.registerOre("afmPlanks", stack);
             }
         }
+
+        OreDictionary.registerOre("blockQuartz", new ItemStack(RegistryHandler.QUARTZ, 1, 0));
+        OreDictionary.registerOre("blockQuartz", new ItemStack(RegistryHandler.QUARTZ, 1, 1));
     }
 }

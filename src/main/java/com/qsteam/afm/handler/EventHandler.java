@@ -5,7 +5,6 @@ import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
@@ -36,22 +35,22 @@ public class EventHandler {
         if (block.equals(Blocks.LOG)) {
             BlockPlanks.EnumType type = state.getValue(BlockOldLog.VARIANT);
             BlockLog.EnumAxis axis = state.getValue(BlockLog.LOG_AXIS);
-            newState = AFMBlocks.STRIPPED_LOG.getDefaultState()
+            newState = RegistryHandler.STRIPPED_LOG.getDefaultState()
                     .withProperty(BlockStrippedOldLog.VARIANT, type)
                     .withProperty(BlockLog.LOG_AXIS, axis);
         } else if (block.equals(Blocks.LOG2)) {
             BlockPlanks.EnumType type = state.getValue(BlockNewLog.VARIANT);
             BlockLog.EnumAxis axis = state.getValue(BlockLog.LOG_AXIS);
-            newState = AFMBlocks.STRIPPED_LOG2.getDefaultState()
+            newState = RegistryHandler.STRIPPED_LOG2.getDefaultState()
                     .withProperty(BlockStrippedNewLog.VARIANT, type)
                     .withProperty(BlockLog.LOG_AXIS, axis);
-        } else if (block.equals(AFMBlocks.WOOD)) {
+        } else if (block.equals(RegistryHandler.WOOD)) {
             BlockPlanks.EnumType type = state.getValue(BlockOldWood.VARIANT);
-            newState = AFMBlocks.STRIPPED_WOOD.getDefaultState()
+            newState = RegistryHandler.STRIPPED_WOOD.getDefaultState()
                     .withProperty(BlockStrippedOldWood.VARIANT, type);
-        } else if (block.equals(AFMBlocks.WOOD2)) {
+        } else if (block.equals(RegistryHandler.WOOD2)) {
             BlockPlanks.EnumType type = state.getValue(BlockNewWood.VARIANT);
-            newState = AFMBlocks.STRIPPED_WOOD2.getDefaultState()
+            newState = RegistryHandler.STRIPPED_WOOD2.getDefaultState()
                     .withProperty(BlockStrippedNewWood.VARIANT, type);
         }
 

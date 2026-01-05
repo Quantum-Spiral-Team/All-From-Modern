@@ -1,6 +1,7 @@
 package com.qsteam.afm.block;
 
 import com.qsteam.afm.AllFromModern;
+import com.qsteam.afm.handler.RegistryHandler;
 import net.minecraft.block.BlockTrapDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -15,6 +16,8 @@ public class BlockWoodenTrapdoor extends BlockTrapDoor {
         setCreativeTab(AllFromModern.AFM_TAB);
         setHardness(3.0F);
         disableStats();
+        
+        RegistryHandler.registerBlock(this);
     }
 
 }

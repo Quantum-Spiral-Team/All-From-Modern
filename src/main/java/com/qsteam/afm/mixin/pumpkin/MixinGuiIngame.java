@@ -1,8 +1,6 @@
 package com.qsteam.afm.mixin.pumpkin;
 
-import com.qsteam.afm.AllFromModern;
-import com.qsteam.afm.block.AFMBlocks;
-import com.qsteam.afm.item.AFMItems;
+import com.qsteam.afm.handler.RegistryHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.gui.ScaledResolution;
@@ -25,7 +23,7 @@ public abstract class MixinGuiIngame {
         Minecraft mc = Minecraft.getMinecraft();
         ItemStack helmet = mc.player.inventory.armorItemInSlot(3);
 
-        if (helmet.isEmpty() || helmet.getItem() != AFMItems.CARVED_PUMPKIN) {
+        if (helmet.isEmpty() || helmet.getItem() != Item.getItemFromBlock(RegistryHandler.CARVED_PUMPKIN)) {
             ci.cancel();
         }
     }

@@ -1,7 +1,5 @@
 package com.qsteam.afm.handler;
 
-import com.qsteam.afm.block.AFMBlocks;
-import com.qsteam.afm.item.AFMItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
@@ -12,6 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -24,7 +23,7 @@ public class RecipeHandler {
         IForgeRegistry<IRecipe> registry = event.getRegistry();
         rewriteRecipes(registry);
         addPotionRecipes();
-
+        addSmeltingRecipes();
     }
 
     private static void rewriteRecipes(IForgeRegistry<IRecipe> registry) {
@@ -64,18 +63,26 @@ public class RecipeHandler {
                 Blocks.LIT_PUMPKIN,
                 "P",
                 "T",
-                'P', AFMBlocks.CARVED_PUMPKIN,
+                'P', RegistryHandler.CARVED_PUMPKIN,
                 'T', Blocks.TORCH
         );
         litPumpkin.setRegistryName(litPumpkinLocation);
         registry.register(litPumpkin);
     }
 
+    private static void addSmeltingRecipes() {
+        GameRegistry.addSmelting(
+                new ItemStack(Blocks.QUARTZ_BLOCK, 1, 0),
+                new ItemStack(RegistryHandler.QUARTZ, 1, 0),
+                0.1F
+        );
+    }
+
     private static void addPotionRecipes() {
-        PotionHelper.addMix(PotionTypes.AWKWARD, AFMItems.PHANTOM_MEMBRANE, PotionHandler.SLOW_FALLING_TYPE);
+        PotionHelper.addMix(PotionTypes.AWKWARD, RegistryHandler.PHANTOM_MEMBRANE, PotionHandler.SLOW_FALLING_TYPE);
         PotionHelper.addMix(PotionHandler.SLOW_FALLING_TYPE, Items.REDSTONE, PotionHandler.LONG_SLOW_FALLING_TYPE);
 
-        PotionHelper.addMix(PotionTypes.AWKWARD, AFMItems.TURTLE_HELMET, PotionHandler.TURTLE_MASTER_TYPE);
+        PotionHelper.addMix(PotionTypes.AWKWARD, RegistryHandler.TURTLE_HELMET, PotionHandler.TURTLE_MASTER_TYPE);
         PotionHelper.addMix(PotionHandler.TURTLE_MASTER_TYPE, Items.REDSTONE, PotionHandler.LONG_TURTLE_MASTER_TYPE);
         PotionHelper.addMix(PotionHandler.TURTLE_MASTER_TYPE, Items.GLOWSTONE_DUST, PotionHandler.STRONG_TURTLE_MASTER_TYPE);
     }

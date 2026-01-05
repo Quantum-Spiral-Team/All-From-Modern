@@ -2,6 +2,7 @@ package com.qsteam.afm.block;
 
 
 import com.qsteam.afm.AllFromModern;
+import com.qsteam.afm.handler.RegistryHandler;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
@@ -22,8 +23,6 @@ import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.entity.Entity;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
@@ -45,19 +44,21 @@ public class BlockCarvedPumpkin extends BlockHorizontal {
         setHardness(1.0F);
         setSoundType(SoundType.WOOD);
         setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-        
+
         this.snowmanPattern = FactoryBlockPattern.start()
-            .aisle("^", "#", "#")
-            .where('^', BlockWorldState.hasState(state -> state != null && state.getBlock() == AFMBlocks.CARVED_PUMPKIN))
-            .where('#', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.SNOW)))
-            .build();
-        
+                .aisle("^", "#", "#")
+                .where('^', BlockWorldState.hasState(state -> state != null && state.getBlock() == this))
+                .where('#', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.SNOW)))
+                .build();
+
         this.golemPattern = FactoryBlockPattern.start()
-            .aisle("~^~", "###", "~#~")
-            .where('^', BlockWorldState.hasState(state -> state != null && state.getBlock() == AFMBlocks.CARVED_PUMPKIN))
-            .where('#', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.IRON_BLOCK)))
-            .where('~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR)))
-            .build();
+                .aisle("~^~", "###", "~#~")
+                .where('^', BlockWorldState.hasState(state -> state != null && state.getBlock() == this))
+                .where('#', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.IRON_BLOCK)))
+                .where('~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR)))
+                .build();
+
+        RegistryHandler.registerBlock(this);
     }
 
     @Override
@@ -103,12 +104,12 @@ public class BlockCarvedPumpkin extends BlockHorizontal {
 
     private void spawnSnowman(World world, BlockPattern.PatternHelper helper) {
         clearBlocksWithParticles(world, helper, snowmanPattern.getThumbLength(), 1);
-        
+
         BlockPos spawnPos = helper.translateOffset(0, 2, 0).getPos();
         EntitySnowman snowman = new EntitySnowman(world);
         snowman.setLocationAndAngles(spawnPos.getX() + 0.5D, spawnPos.getY() + 0.05D, spawnPos.getZ() + 0.5D, 0.0F, 0.0F);
         world.spawnEntity(snowman);
-        
+
         triggerSummonedEntity(world, snowman);
         for (int j1 = 0; j1 < SPAWN_PARTICLE_COUNT; ++j1) {
             spawnEffectParticles((WorldServer) world, spawnPos, EnumParticleTypes.SNOW_SHOVEL, 2.5D);
@@ -118,13 +119,13 @@ public class BlockCarvedPumpkin extends BlockHorizontal {
 
     private void spawnIronGolem(World world, BlockPattern.PatternHelper helper) {
         clearBlocksWithParticles(world, helper, golemPattern.getThumbLength(), golemPattern.getPalmLength());
-        
+
         BlockPos spawnPos = helper.translateOffset(1, 2, 0).getPos();
         EntityIronGolem golem = new EntityIronGolem(world);
         golem.setPlayerCreated(true);
         golem.setLocationAndAngles(spawnPos.getX() + 0.5D, spawnPos.getY() + 0.05D, spawnPos.getZ() + 0.5D, 0.0F, 0.0F);
         world.spawnEntity(golem);
-        
+
         triggerSummonedEntity(world, golem);
         for (int j1 = 0; j1 < SPAWN_PARTICLE_COUNT; ++j1) {
             spawnEffectParticles((WorldServer) world, spawnPos, EnumParticleTypes.SNOWBALL, 3.9D);

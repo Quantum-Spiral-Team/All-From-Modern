@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "afm:quartz_block",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "afm:smooth_quartz_stairs",
+    "count": 4
+  }
+}

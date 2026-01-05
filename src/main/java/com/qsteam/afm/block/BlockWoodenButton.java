@@ -1,6 +1,7 @@
 package com.qsteam.afm.block;
 
 import com.qsteam.afm.AllFromModern;
+import com.qsteam.afm.handler.RegistryHandler;
 import net.minecraft.block.BlockButtonWood;
 import net.minecraft.block.SoundType;
 
@@ -13,6 +14,8 @@ public class BlockWoodenButton extends BlockButtonWood {
         setTranslationKey(wood + "_button");
         setRegistryName(wood + "_button");
         setCreativeTab(AllFromModern.AFM_TAB);
+        
+        RegistryHandler.registerBlock(this);
     }
 
 }

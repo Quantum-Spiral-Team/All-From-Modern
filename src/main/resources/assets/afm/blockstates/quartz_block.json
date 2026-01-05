@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "variant=smooth": { "model": "afm:quartz/smooth" },
+    "variant=bricks": { "model": "afm:quartz/bricks" }
+  }
+}

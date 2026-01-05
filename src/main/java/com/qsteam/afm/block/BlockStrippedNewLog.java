@@ -1,5 +1,7 @@
 package com.qsteam.afm.block;
 
+import com.qsteam.afm.api.block.IBlockMeta;
+import com.qsteam.afm.handler.RegistryHandler;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
@@ -16,7 +18,7 @@ import net.minecraft.world.IBlockAccess;
 import static com.qsteam.afm.AllFromModern.AFM_TAB;
 
 @SuppressWarnings("deprecation")
-public class BlockStrippedNewLog extends BlockLog {
+public class BlockStrippedNewLog extends BlockLog implements IBlockMeta {
 
     public static final PropertyEnum<BlockPlanks.EnumType> VARIANT = PropertyEnum.create("variant", BlockPlanks.EnumType.class,
             type -> type.getMetadata() >= 4);
@@ -30,6 +32,8 @@ public class BlockStrippedNewLog extends BlockLog {
         setSoundType(SoundType.WOOD);
         setCreativeTab(AFM_TAB);
         setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, BlockPlanks.EnumType.ACACIA).withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
+
+        RegistryHandler.registerBlock(this);
     }
 
     @Override public boolean canSustainLeaves(IBlockState state, IBlockAccess world, BlockPos pos) { return false; }
@@ -48,7 +52,6 @@ public class BlockStrippedNewLog extends BlockLog {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        // Мы добавляем 4, потому что в метаданных этого блока 0 - это Акация (которая в EnumType имеет ID 4)
         IBlockState state = this.getDefaultState().withProperty(VARIANT, BlockPlanks.EnumType.byMetadata((meta & 3) + 4));
 
         switch (meta & 12) {
@@ -63,7 +66,7 @@ public class BlockStrippedNewLog extends BlockLog {
     @Override
     public int getMetaFromState(IBlockState state) {
         int i = 0;
-        i = i | state.getValue(VARIANT).getMetadata() - 4; // Вычитаем 4, чтобы уместить в мета 0-3
+        i = i | state.getValue(VARIANT).getMetadata() - 4;
 
         switch (state.getValue(LOG_AXIS)) {
             case X: i |= 4; break;
@@ -81,5 +84,15 @@ public class BlockStrippedNewLog extends BlockLog {
     @Override
     public int damageDropped(IBlockState state) {
         return state.getValue(VARIANT).getMetadata() - 4;
+    }
+
+    @Override
+    public PropertyEnum<?> getVariantProperty() {
+        return VARIANT;
+    }
+
+    @Override
+    public String getModelVariant() {
+        return "axis=y,variant=";
     }
 }

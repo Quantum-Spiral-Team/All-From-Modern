@@ -1,6 +1,6 @@
 package com.qsteam.afm.mixin.pumpkin;
 
-import com.qsteam.afm.block.AFMBlocks;
+import com.qsteam.afm.handler.RegistryHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,6 +19,6 @@ public abstract class MixinEntityLiving {
             )
     )
     private static Block redirectPumpkinField() {
-        return AFMBlocks.CARVED_PUMPKIN;
+        return RegistryHandler.CARVED_PUMPKIN;
     }
 }
