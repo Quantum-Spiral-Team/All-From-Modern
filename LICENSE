@@ -1,3 +1,34 @@
+MOD LICENSE AGREEMENT (2026)
+
+Copyright (C) 2026 Quantum Spiral Team (https://github.com/Quantum-Spiral-Team)
+
+This project is distributed under a split-licensing model to respect the rights
+of the developers and third-party copyright holders.
+
+1. SOFTWARE CODE
+All source code (.java, .kt, .py, etc.) and build scripts in this repository
+are licensed under the GNU Affero General Public License version 3 (AGPL-3.0).
+See the full text below.
+
+2. GRAPHICAL ASSETS AND RESOURCES
+The assets in this project are governed by the following terms:
+
+   a) ORIGINAL ASSETS (by Quantum Spiral Team):
+      All custom textures, 3D models, and sound files created by
+      Quantum Spiral Team are licensed under the Creative Commons
+      Attribution-NonCommercial 4.0 International (CC BY-NC 4.0).
+      - You MAY share and adapt these assets.
+      - You MUST give appropriate credit to Quantum Spiral Team.
+      - You MAY NOT use these assets for commercial purposes.
+
+   b) MOJANG ASSETS (Minecraft):
+      Textures and assets belonging to Mojang AB included in this mod
+      remain the sole intellectual property of Mojang AB. These are used
+      under the Minecraft EULA and Commercial Guidelines. They are
+      EXCLUDED from the AGPL-3.0 and CC BY-NC 4.0 licenses.
+
+--------------------------------------------------------------------------------
+
                     GNU AFFERO GENERAL PUBLIC LICENSE
                        Version 3, 19 November 2007
 
