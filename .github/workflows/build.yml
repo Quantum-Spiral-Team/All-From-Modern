@@ -1,9 +1,8 @@
 name: Java CI with Gradle
 
-# Запускать при каждом пуше в ветку main (или master)
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -28,5 +27,5 @@ jobs:
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Mod-Jar
+          name: AllFromModern
           path: build/libs/*.jar
