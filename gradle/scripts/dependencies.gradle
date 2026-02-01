@@ -25,6 +25,10 @@ repositories {
             includeGroup 'maven.modrinth'
         }
     }
+    maven {
+        name 'CleanroomMC Maven'
+        url 'https://maven.cleanroommc.com'
+    }
     mavenLocal() // Must be last for caching to work
 }
 
