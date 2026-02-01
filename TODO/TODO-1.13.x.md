@@ -30,7 +30,7 @@
     - [ ] - Petrified oak slab (Easter eggs)
     - [x] - Phantom membranes
     - [x] - Scutes
-    - [ ] - Smooth quartz
+    - [x] - Smooth quartz
     - [ ] - Trident (weapon)
     - [x] - Turtle shells
     - [x] - Wood blocks
