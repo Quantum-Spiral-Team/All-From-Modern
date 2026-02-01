@@ -48,6 +48,9 @@ jobs:
         run: |
           set -euo pipefail
           
+          echo "eula=true" > eula.txt
+          mkdir -p run
+          echo "eula=true" > run/eula.txt
           mkdir -p run/server
           echo "eula=true" > run/server/eula.txt
           
@@ -56,7 +59,7 @@ jobs:
           
           echo "stop" > run/server/stop.txt
           set +e
-          timeout 120s ./gradlew runServer -Peula=true --no-daemon --stacktrace < run/server/stop.txt 2>&1 | tee server.log
+          timeout 120s ./gradlew runServer --no-daemon --stacktrace < run/server/stop.txt 2>&1 | tee server.log
           code=${PIPESTATUS[0]}
           set -e
           
