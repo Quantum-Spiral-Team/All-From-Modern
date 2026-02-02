@@ -6,127 +6,83 @@
 
 // Integrate python scripts
 static def findExecutable(String name) {
-    // Prioritize system PATH search (which/where)
+    def command = System.properties['os.name'].toLowerCase().contains('windows') ? "where $name" : "which $name"
     try {
-        def process = "which $name".execute()
+        def process = command.execute()
         process.waitFor()
         if (process.exitValue() == 0) {
-            return process.text.trim()
+            // On Windows, 'where' can return multiple paths. We'll take the first one.
+            return process.text.split('\n')[0].trim()
         }
-    } catch (Exception ignored) {
-        // Fallback for Windows
-        try {
-            def process = "where $name".execute()
-            process.waitFor()
-            if (process.exitValue() == 0) {
-                return process.text.split('\n')[0].trim()
-            }
-        } catch (Exception ignored2) {
-            // Ignored
-        }
-    }
-
-    // Fallback to common hardcoded paths if system PATH search fails
-    def commonPaths = [
-        '/usr/local/bin', '/usr/bin', '/bin', '/opt/homebrew/bin', // Unix-like
-        'C:/Python/Python310/Scripts', 'C:/Python/Python310', // Windows common Python install
-        'C:/Program Files/Python310/Scripts', 'C:/Program Files/Python310' // Windows common Python install
-    ]
-
-    for (path in commonPaths) {
-        def file = new File(path, name)
-        if (file.canExecute()) {
-            return file.absolutePath
-        }
-        // For Windows, check with .exe extension
-        if (System.properties['os.name'].toLowerCase().contains('windows')) {
-            file = new File(path, name + '.exe')
-            if (file.canExecute()) {
-                return file.absolutePath
-            }
-        }
+    } catch (IOException e) {
+        // Command not found or other execution error
+        return null
     }
     return null
 }
 
 static def findPythonExecutable() {
-    // Prioritize python3 as it's generally the latest stable version
-    def pythonExec = findExecutable('python3')
+    // Prioritize python3, then fallback to python
+    def pythonExec = findExecutable('python3') ?: findExecutable('python')
     if (pythonExec) return pythonExec
-    // Fallback to generic 'python'
-    pythonExec = findExecutable('python')
-    if (pythonExec) return pythonExec
-    throw new GradleException("Python executable not found. Please install Python or ensure it's in your PATH.")
+    throw new GradleException("Python executable not found. Please ensure 'python' or 'python3' is in your system's PATH.")
 }
 
-def systemPythonExecutable = findPythonExecutable()
+final def systemPythonExecutable = findPythonExecutable()
 
-println "Detected Python executable: ${systemPythonExecutable}"
+logger.lifecycle("Detected Python executable: {}", systemPythonExecutable)
 try {
     def process = "${systemPythonExecutable} -V".execute()
     process.waitFor()
     if (process.exitValue() == 0) {
-        println "Python version: ${process.text.trim()}"
+        logger.lifecycle("Python version: {}", process.text.trim())
     } else {
-        println "Could not determine Python version using '${systemPythonExecutable} -V'. Error: ${process.errorStream.text.trim()}"
+        logger.warn("Could not determine Python version. Error: {}", process.errorStream.text.trim())
     }
 } catch (Exception e) {
-    println "Error executing Python to get version: ${e.message}"
+    logger.error("Error executing Python to get version: {}", e.message)
 }
 
-def venvDir = file("${projectDir}/.venv")
-def venvPythonExecutable
-
-if (System.properties['os.name'].toLowerCase().contains('windows')) {
-    venvPythonExecutable = file("${venvDir}/Scripts/python.exe")
-} else {
-    venvPythonExecutable = file("${venvDir}/bin/python")
-}
+final def venvDir = file("${project.projectDir}/.venv")
+final def venvPythonExecutable = System.properties['os.name'].toLowerCase().contains('windows') ?
+        file("${venvDir}/Scripts/python.exe") :
+        file("${venvDir}/bin/python")
 
 tasks.register('createPythonVenv', Exec) {
     group 'build'
     description 'Creates a Python virtual environment for the project.'
     outputs.dir venvDir
-    doNotTrackState('This task creates a virtual environment which might be modified externally.')
-
     commandLine systemPythonExecutable, '-m', 'venv', venvDir.absolutePath
-    
-    // Only run if the venv doesn't exist or its python executable is missing
-    onlyIf {
-        !venvDir.exists() || !venvPythonExecutable.exists()
-    }
+
+    // Only run if the venv python executable doesn't exist
+    onlyIf { !venvPythonExecutable.exists() }
 }
 
 tasks.register('installPythonDependencies', Exec) {
     group 'build'
     description 'Installs Python dependencies from gradle.properties into the virtual environment.'
     dependsOn tasks.named('createPythonVenv')
+    inputs.property('python_dependencies', project.findProperty('python_dependencies') ?: '')
+    outputs.dir venvDir
 
-    outputs.dir venvDir // The task modifies the venv, so it's an output
+    commandLine(
+        venvPythonExecutable.absolutePath,
+        '-m', 'pip', 'install',
+        // Split dependencies by space. Assumes property is like "requests numpy pandas"
+        *(project.findProperty('python_dependencies')?.split(' ') ?: [])
+    )
 
-    doFirst {
-        if (project.hasProperty('python_dependencies')) {
-            def dependencies = project.property('python_dependencies').split(/[^a-zA-Z0-9-]+/).findAll { it }
-            if (dependencies) {
-                commandLine venvPythonExecutable, '-m', 'pip', 'install', *dependencies
-            }
-        }
-    }
-
-    // Only run if the python_dependencies property exists
-    onlyIf {
-        project.hasProperty('python_dependencies')
-    }
+    // Only run if the python_dependencies property exists and is not empty
+    onlyIf { project.hasProperty('python_dependencies') && project.property('python_dependencies').trim() }
 }
 
 tasks.register('runPythonScripts') {
     group 'build'
     description 'Runs all Python scripts found in the scripts/ directory.'
-    // Run scripts only after dependencies are installed
     dependsOn tasks.named('installPythonDependencies')
 }
 
-def pythonScriptsDir = file("${projectDir}/scripts")
+final def pythonScriptsDir = file("${project.projectDir}/scripts")
 if (pythonScriptsDir.exists() && pythonScriptsDir.isDirectory()) {
     pythonScriptsDir.eachFileRecurse(groovy.io.FileType.FILES) { scriptFile ->
         if (scriptFile.name.endsWith('.py')) {
@@ -136,17 +92,16 @@ if (pythonScriptsDir.exists() && pythonScriptsDir.isDirectory()) {
             tasks.register(taskName, Exec) {
                 group 'build'
                 description "Runs the Python script: ${scriptFile.name}"
-                // This task should run after dependencies are installed
                 dependsOn tasks.named('installPythonDependencies')
 
                 commandLine venvPythonExecutable.absolutePath, scriptFile.absolutePath
-                workingDir projectDir
+                workingDir project.projectDir
             }
-            tasks.named('runPythonScripts') {
+            tasks.named('runPythonScripts').configure {
                 dependsOn tasks.named(taskName)
             }
         }
     }
 } else {
-    println "Warning: Python scripts directory '${pythonScriptsDir.absolutePath}' does not exist or is not a directory. No Python scripts will be run."
+    logger.log(LogLevel.LIFECYCLE, "Python scripts directory not found: '{}'. No Python script tasks will be created.", pythonScriptsDir.absolutePath)
 }
