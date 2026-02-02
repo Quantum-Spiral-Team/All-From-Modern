@@ -3,7 +3,6 @@ package com.qsteam.afm.core;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.objectweb.asm.Opcodes;
 
-//Personal credits for EnderDeveloper and his EnderModpackTweaks
 public class AFMTransformer implements IClassTransformer, Opcodes {
 
     private static final String HOOKS = Hooks.class.getName().replace(".", "/");
@@ -13,7 +12,6 @@ public class AFMTransformer implements IClassTransformer, Opcodes {
         return basicClass;
     }
 
-    public static class Hooks {
+    public static class Hooks {}
 
-    }
 }

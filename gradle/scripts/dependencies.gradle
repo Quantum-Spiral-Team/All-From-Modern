@@ -81,6 +81,9 @@ dependencies {
     implementation rfg.deobf("curse.maven:top-addons-247111:2887479")
 
     // fix lightning bugs in dev
-    runtimeOnly rfg.deobf(fileTree("libs"))
+    runtimeOnly rfg.deobf(files(
+            "libs/!Red-Core-MC-1.8-1.12-0.7.jar",
+            "libs/Alfheim-1.6.jar"
+    ))
 
 }

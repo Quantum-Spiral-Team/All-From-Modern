@@ -2,6 +2,7 @@ package com.qsteam.afm.block;
 
 import com.qsteam.afm.api.block.IBlockMeta;
 import com.qsteam.afm.handler.RegistryHandler;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
