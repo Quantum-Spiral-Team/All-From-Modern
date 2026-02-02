@@ -2,9 +2,9 @@ import os
 import re
 from PIL import Image
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-ASSETS_ROOT = os.path.join(SCRIPT_DIR, '.assets')
-OUTPUT_ROOT = os.path.join(SCRIPT_DIR, 'src', 'main', 'resources', 'assets')
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ASSETS_ROOT = os.path.join(PROJECT_ROOT, '.assets')
+OUTPUT_ROOT = os.path.join(PROJECT_ROOT, 'src', 'main', 'resources', 'assets')
 
 class AtlasConfig:
     def __init__(self, name, source_subpath, output_subpath, tile_size=18, mode='compact'):

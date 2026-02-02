@@ -315,6 +315,10 @@ tasks.withType(JavaCompile).configureEach {
     }
 }
 
+tasks.named('compileJava').configure {
+    dependsOn tasks.named('runPythonScripts')
+}
+
 tasks.register('cleanroomAfterSync') {
     group 'cleanroom helpers'
     dependsOn 'injectTags', 'generateMixinJson'

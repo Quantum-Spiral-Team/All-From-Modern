@@ -3,3 +3,125 @@
 
 // If you wish to use the default helper methods, uncomment the line below
 // apply from: 'gradle/scripts/helpers.gradle'
+
+// Integrate python scripts
+static def findExecutable(String name) {
+    // Prioritize system PATH search (which/where)
+    try {
+        def process = "which $name".execute()
+        process.waitFor()
+        if (process.exitValue() == 0) {
+            return process.text.trim()
+        }
+    } catch (Exception ignored) {
+        // Fallback for Windows
+        try {
+            def process = "where $name".execute()
+            process.waitFor()
+            if (process.exitValue() == 0) {
+                return process.text.split('\n')[0].trim()
+            }
+        } catch (Exception ignored2) {
+            // Ignored
+        }
+    }
+
+    // Fallback to common hardcoded paths if system PATH search fails
+    def commonPaths = [
+        '/usr/local/bin', '/usr/bin', '/bin', '/opt/homebrew/bin', // Unix-like
+        'C:/Python/Python310/Scripts', 'C:/Python/Python310', // Windows common Python install
+        'C:/Program Files/Python310/Scripts', 'C:/Program Files/Python310' // Windows common Python install
+    ]
+
+    for (path in commonPaths) {
+        def file = new File(path, name)
+        if (file.canExecute()) {
+            return file.absolutePath
+        }
+        // For Windows, check with .exe extension
+        if (System.properties['os.name'].toLowerCase().contains('windows')) {
+            file = new File(path, name + '.exe')
+            if (file.canExecute()) {
+                return file.absolutePath
+            }
+        }
+    }
+    return null
+}
+
+static def findPythonExecutable() {
+    // Prioritize python3 as it's generally the latest stable version
+    def pythonExec = findExecutable('python3')
+    if (pythonExec) return pythonExec
+    // Fallback to generic 'python'
+    pythonExec = findExecutable('python')
+    if (pythonExec) return pythonExec
+    throw new GradleException("Python executable not found. Please install Python or ensure it's in your PATH.")
+}
+
+def systemPythonExecutable = findPythonExecutable()
+
+println "Detected Python executable: ${systemPythonExecutable}"
+try {
+    def process = "${systemPythonExecutable} -V".execute()
+    process.waitFor()
+    if (process.exitValue() == 0) {
+        println "Python version: ${process.text.trim()}"
+    } else {
+        println "Could not determine Python version using '${systemPythonExecutable} -V'. Error: ${process.errorStream.text.trim()}"
+    }
+} catch (Exception e) {
+    println "Error executing Python to get version: ${e.message}"
+}
+
+def venvDir = file("${projectDir}/.venv")
+def venvPythonExecutable
+
+if (System.properties['os.name'].toLowerCase().contains('windows')) {
+    venvPythonExecutable = file("${venvDir}/Scripts/python.exe")
+} else {
+    venvPythonExecutable = file("${venvDir}/bin/python")
+}
+
+tasks.register('createPythonVenv', Exec) {
+    group 'build'
+    description 'Creates a Python virtual environment for the project.'
+    outputs.dir venvDir
+    doNotTrackState('This task creates a virtual environment which might be modified externally.')
+
+    commandLine systemPythonExecutable, '-m', 'venv', venvDir.absolutePath
+    
+    // Only run if the venv doesn't exist or its python executable is missing
+    onlyIf {
+        !venvDir.exists() || !venvPythonExecutable.exists()
+    }
+}
+
+tasks.register('runPythonScripts') {
+    group 'build'
+    description 'Runs all Python scripts found in the scripts/ directory.'
+}
+
+def pythonScriptsDir = file("${projectDir}/scripts")
+if (pythonScriptsDir.exists() && pythonScriptsDir.isDirectory()) {
+    pythonScriptsDir.eachFileRecurse(groovy.io.FileType.FILES) { scriptFile ->
+        if (scriptFile.name.endsWith('.py')) {
+            def scriptName = scriptFile.name.substring(0, scriptFile.name.lastIndexOf('.'))
+            def taskName = "runPythonScript_${scriptName}"
+
+            tasks.register(taskName, Exec) {
+                group 'build'
+                description "Runs the Python script: ${scriptFile.name}"
+                dependsOn tasks.named('createPythonVenv')
+
+                commandLine venvPythonExecutable.absolutePath, scriptFile.absolutePath
+                workingDir scriptFile.parentFile // Set working directory to the script's directory
+            }
+            tasks.named('runPythonScripts') {
+                dependsOn tasks.named(taskName)
+            }
+        }
+    }
+} else {
+    println "Warning: Python scripts directory '${pythonScriptsDir.absolutePath}' does not exist or is not a directory. No Python scripts will be run."
+}
