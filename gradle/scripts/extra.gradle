@@ -97,9 +97,33 @@ tasks.register('createPythonVenv', Exec) {
     }
 }
 
+tasks.register('installPythonDependencies', Exec) {
+    group 'build'
+    description 'Installs Python dependencies from gradle.properties into the virtual environment.'
+    dependsOn tasks.named('createPythonVenv')
+
+    outputs.dir venvDir // The task modifies the venv, so it's an output
+
+    doFirst {
+        if (project.hasProperty('python_dependencies')) {
+            def dependencies = project.property('python_dependencies').split(/[^a-zA-Z0-9-]+/).findAll { it }
+            if (dependencies) {
+                commandLine venvPythonExecutable, '-m', 'pip', 'install', *dependencies
+            }
+        }
+    }
+
+    // Only run if the python_dependencies property exists
+    onlyIf {
+        project.hasProperty('python_dependencies')
+    }
+}
+
 tasks.register('runPythonScripts') {
     group 'build'
     description 'Runs all Python scripts found in the scripts/ directory.'
+    // Run scripts only after dependencies are installed
+    dependsOn tasks.named('installPythonDependencies')
 }
 
 def pythonScriptsDir = file("${projectDir}/scripts")
@@ -112,10 +136,11 @@ if (pythonScriptsDir.exists() && pythonScriptsDir.isDirectory()) {
             tasks.register(taskName, Exec) {
                 group 'build'
                 description "Runs the Python script: ${scriptFile.name}"
-                dependsOn tasks.named('createPythonVenv')
+                // This task should run after dependencies are installed
+                dependsOn tasks.named('installPythonDependencies')
 
                 commandLine venvPythonExecutable.absolutePath, scriptFile.absolutePath
-                workingDir scriptFile.parentFile // Set working directory to the script's directory
+                workingDir projectDir
             }
             tasks.named('runPythonScripts') {
                 dependsOn tasks.named(taskName)
