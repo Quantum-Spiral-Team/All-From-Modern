@@ -14,5 +14,46 @@
       "afm:item/axe/strip3",
       "afm:item/axe/strip4"
     ]
+  },
+  "item.trident.hit": {
+    "category": "neutral",
+    "sounds": [
+      "afm:item/trident/pierce1",
+      "afm:item/trident/pierce2",
+      "afm:item/trident/pierce3"
+    ]
+  },
+  "item.trident.hit_ground": {
+    "category": "neutral",
+    "sounds": [
+      "afm:item/trident/ground_impact1",
+      "afm:item/trident/ground_impact2",
+      "afm:item/trident/ground_impact3",
+      "afm:item/trident/ground_impact4"
+    ]
+  },
+  "item.trident.return": {
+    "category": "neutral",
+    "sounds": [
+      "afm:item/trident/return1",
+      "afm:item/trident/return2",
+      "afm:item/trident/return3"
+    ]
+  },
+  "item.trident.throw": {
+    "category": "neutral",
+    "sounds": ["afm:item/trident/throw1", "afm:item/trident/throw2"]
+  },
+  "item.trident.thunder": {
+    "category": "neutral",
+    "sounds": ["afm:item/trident/thunder1", "afm:item/trident/thunder2"]
+  },
+  "item.trident.riptide": {
+    "category": "neutral",
+    "sounds": [
+      "afm:item/trident/riptide1",
+      "afm:item/trident/riptide2",
+      "afm:item/trident/riptide3"
+    ]
   }
 }

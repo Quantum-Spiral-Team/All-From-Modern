@@ -1,23 +1,36 @@
 package com.qsteam.afm.core;
 
 import com.google.common.collect.ImmutableMap;
+import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import zone.rong.mixinbooter.IEarlyMixinLoader;
 
 import java.util.*;
 import java.util.function.BooleanSupplier;
 
-//Personal credits for EnderDeveloper and his EnderModpackTweaks
+@IFMLLoadingPlugin.Name(AFMLoadingPlugin.PLUGIN_NAME)
+@IFMLLoadingPlugin.MCVersion(ForgeVersion.mcVersion)
+@IFMLLoadingPlugin.SortingIndex(Integer.MIN_VALUE)
 public class AFMLoadingPlugin implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
-    public static final boolean isClient = FMLLaunchHandler.side().isClient();
+    static final String PLUGIN_NAME = "AllFromModernCore";
+    private static final Logger LOGGER = LogManager.getLogger(PLUGIN_NAME);
 
-    private static final Map<String, BooleanSupplier> SERVER_MIXIN_CONFIGS = Collections.emptyMap();
+    public static final boolean IS_CLIENT = FMLLaunchHandler.side().isClient();
+
+    private static final Map<String, BooleanSupplier> CLIENT_MIXIN_CONFIGS = ImmutableMap.of(
+            "mixins/mixins.afm.potion.json", () -> true
+    );
+
+    private static final Map<String, BooleanSupplier> SERVER_MIXIN_CONFIGS = ImmutableMap.of();
 
     private static final Map<String, BooleanSupplier> COMMON_MIXIN_CONFIGS = ImmutableMap.of(
             "mixins/mixins.afm.pumpkin.json", () -> true,
-            "mixins/mixins.afm.potion.json", () -> true
+
+            "mixins/mixins.afm.trident.json", () -> true
     );
 
     @Override
@@ -27,7 +40,7 @@ public class AFMLoadingPlugin implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
     @Override
     public String getModContainerClass() {
-        return null;
+        return AFMModContainer.class.getName();
     }
 
     @Override
@@ -37,13 +50,11 @@ public class AFMLoadingPlugin implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
     @Override
     public void injectData(Map<String, Object> data) {
-//        try {
-//            Field f_transformerExceptions = LaunchClassLoader.class.getDeclaredField("transformerExceptions");
-//            f_transformerExceptions.setAccessible(true);
-//            Set<String> transformerExceptions = (Set<String>) f_transformerExceptions.get(Launch.classLoader);
-//        } catch (NoSuchFieldException | IllegalAccessException e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+
+        } catch (Exception e) {
+            LOGGER.fatal(e);
+        }
     }
 
     @Override
@@ -51,24 +62,23 @@ public class AFMLoadingPlugin implements IFMLLoadingPlugin, IEarlyMixinLoader {
         return AFMTransformer.class.getName();
     }
 
-
     @Override
     public List<String> getMixinConfigs() {
-//        List<String> configs = new ArrayList<>();
-//        if (isClient) {
-//            configs.addAll(CLIENT_MIXIN_CONFIGS.keySet());
-//        } else {
-//            configs.addAll(SERVER_MIXIN_CONFIGS.keySet());
-//        }
-//        configs.addAll(COMMON_MIXIN_CONFIGS.keySet());
-        return new ArrayList<>(COMMON_MIXIN_CONFIGS.keySet());
+        List<String> configs = new ArrayList<>();
+        if (IS_CLIENT) {
+            configs.addAll(CLIENT_MIXIN_CONFIGS.keySet());
+        } else {
+            configs.addAll(SERVER_MIXIN_CONFIGS.keySet());
+        }
+        configs.addAll(COMMON_MIXIN_CONFIGS.keySet());
+        return configs;
     }
 
     @Override
     public boolean shouldMixinConfigQueue(String mixinConfig) {
-//        BooleanSupplier sidedSupplier = isClient ? CLIENT_MIXIN_CONFIGS.get(mixinConfig) : null;
+        BooleanSupplier sidedSupplier = IS_CLIENT ? CLIENT_MIXIN_CONFIGS.get(mixinConfig) : null;
         BooleanSupplier commonSupplier = COMMON_MIXIN_CONFIGS.get(mixinConfig);
-//        return sidedSupplier != null ? sidedSupplier.getAsBoolean() : commonSupplier == null || commonSupplier.getAsBoolean();
-        return commonSupplier != null && commonSupplier.getAsBoolean();
+        return sidedSupplier != null ? sidedSupplier.getAsBoolean() : commonSupplier == null || commonSupplier.getAsBoolean();
     }
+
 }

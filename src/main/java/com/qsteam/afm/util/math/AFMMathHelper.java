@@ -10,6 +10,4 @@ public final class AFMMathHelper {
         return prev + partialTicks * (current - prev);
     }
 
-
-
 }

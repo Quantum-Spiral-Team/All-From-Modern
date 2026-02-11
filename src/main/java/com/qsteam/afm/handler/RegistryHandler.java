@@ -6,6 +6,7 @@ import com.qsteam.afm.block.base.BlockBase;
 import com.qsteam.afm.block.base.BlockDoubleSlabBase;
 import com.qsteam.afm.block.base.BlockHalfSlabBase;
 import com.qsteam.afm.block.base.BlockStairsBase;
+import com.qsteam.afm.item.ItemTrident;
 import com.qsteam.afm.item.base.ItemArmorBase;
 import com.qsteam.afm.item.base.ItemBase;
 import com.qsteam.afm.item.base.itemblock.ItemMetaBlockBase;
@@ -84,6 +85,8 @@ public class RegistryHandler {
 
     public static final ItemArmor TURTLE_HELMET;
 
+    public static final Item TRIDENT;
+
     static {
         BLUE_ICE = new BlockBase("blue_ice", Material.PACKED_ICE, SoundType.GLASS) {
             @Override
@@ -143,6 +146,7 @@ public class RegistryHandler {
         TURTLE_SCUTE = new ItemBase("turtle_scute");
         TURTLE_HELMET = new ItemArmorBase("turtle_helmet", ItemArmorBase.TURTLE_SCUTE, EntityEquipmentSlot.HEAD);
         PHANTOM_MEMBRANE = new ItemBase("phantom_membrane");
+        TRIDENT = new ItemTrident();
 
     }
 

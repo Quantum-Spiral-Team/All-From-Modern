@@ -4,6 +4,7 @@ import com.qsteam.afm.api.block.IBlockMeta;
 import com.qsteam.afm.api.item.IItemModel;
 import com.qsteam.afm.block.base.BlockHalfSlabBase;
 import com.qsteam.afm.handler.RegistryHandler;
+import com.qsteam.afm.handler.RenderHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -14,13 +15,20 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SuppressWarnings("ConstantConditions")
+@SuppressWarnings({"ConstantConditions"})
 @EventBusSubscriber(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
+
+    @Override
+    public void preInit(FMLPreInitializationEvent event) {
+        super.preInit(event);
+        RenderHandler.registerEntityRenders();
+    }
 
     @SubscribeEvent
     public static void onModelRegister(ModelRegistryEvent event) {

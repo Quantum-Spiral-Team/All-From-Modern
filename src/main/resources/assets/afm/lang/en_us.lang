@@ -48,6 +48,7 @@ tile.smooth_quartz_stairs.name=Smooth Quartz Stairs
 item.turtle_scute.name=Turtle Scute
 item.turtle_helmet.name=Turtle Shell
 item.phantom_membrane.name=Phantom Membrane
+item.trident.name=Trident
 
 # Effects
 effect.slow_falling=Slow Falling

@@ -1,0 +1,20 @@
+{
+  "package": "com.qsteam.afm.mixin.trident",
+  "required": true,
+  "refmap": "mixins.afm.refmap.json",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8.5",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "EntityAccessor",
+    "MixinEntity",
+    "MixinEntityLightningBolt",
+    "MixinEntityPlayer"
+  ],
+  "server": [],
+  "client": [
+    "MixinTileEntityItemStackRenderer",
+    "MixinItemRenderer",
+    "MixinModelBiped"
+  ]
+}
