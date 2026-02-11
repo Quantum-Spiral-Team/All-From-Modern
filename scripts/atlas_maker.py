@@ -14,7 +14,7 @@ class AtlasConfig:
         self.tile_size = tile_size
         self.mode = mode # 'grid' or 'compact'
 
-def create_atlas(config: AtlasConfig):
+def create_atlas(config: AtlasConfig) -> None:
     if not os.path.exists(config.source_dir):
         print(f"Skipping {config.name}: Source dir not found.")
         return
@@ -27,7 +27,7 @@ def create_atlas(config: AtlasConfig):
     else:
         generate_compact_atlas(config, files)
 
-def generate_grid_atlas(config: AtlasConfig, files):
+def generate_grid_atlas(config: AtlasConfig, files) -> None:
     pattern = re.compile(r'^(\d+)-(\d+)-(.+)\.png$')
     to_process = []
     max_gx = max_gy = 0
@@ -48,7 +48,7 @@ def generate_grid_atlas(config: AtlasConfig, files):
 
     save_atlas(atlas, config.output_path)
 
-def generate_compact_atlas(config, files):
+def generate_compact_atlas(config: AtlasConfig, files) -> None:
     import math
     n = len(files)
     columns = math.ceil(math.sqrt(n))
@@ -66,7 +66,7 @@ def generate_compact_atlas(config, files):
 
     save_atlas(atlas, config.output_path)
 
-def save_atlas(image, path):
+def save_atlas(image, path) -> None:
     os.makedirs(os.path.dirname(path), exist_ok=True)
     image.save(path)
     print(f"Success: Atlas saved to {path} ({image.width}x{image.height})")
