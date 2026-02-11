@@ -27,8 +27,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.Nullable;
 
-
-//FIXME оно работает почти идеально, но осталось пару багов: попадание по энтити, обновления в блоках (он подскакивает раз в какое-то время) и слишком большая скорость зачарования "верность"
 public class EntityTrident extends EntityAbstractArrow {
 
     private static final DataParameter<Byte> LOYALTY_LEVEL = EntityDataManager.createKey(EntityTrident.class,
@@ -92,10 +90,7 @@ public class EntityTrident extends EntityAbstractArrow {
                 Vec3d relativePos = new Vec3d(shooter.posX - this.posX,
                         shooter.posY + (double) shooter.getEyeHeight() - this.posY, shooter.posZ - this.posZ);
                 double speed = 0.05D * loyalty;
-                this.motionX += relativePos.x * speed - this.motionX * 0.05D;
-                this.motionY += relativePos.y * speed - this.motionY * 0.05D;
-                this.motionZ += relativePos.z * speed - this.motionZ * 0.05D;
-
+                this.setMotion(this.getMotion().scale(0.95D).add(relativePos.normalize().scale(speed)));
                 if (this.returningTicks == 0) {
                     this.playSound(SoundHandler.ITEM_TRIDENT_RETURN, 10.0F, 1.0F);
                 }

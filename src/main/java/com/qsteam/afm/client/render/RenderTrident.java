@@ -2,6 +2,8 @@ package com.qsteam.afm.client.render;
 
 import com.qsteam.afm.client.model.ModelTrident;
 import com.qsteam.afm.entity.projectile.EntityTrident;
+import com.qsteam.afm.util.RenderHelper;
+import com.qsteam.afm.util.math.AFMMathHelper;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -43,7 +45,7 @@ public class RenderTrident extends Render<EntityTrident> {
         this.modelTrident.render();
 
         if (entity.isEnchanted()) {
-            this.renderEnchantedGlint(this, entity, this.modelTrident::render, x, y, z, partialTicks);
+            RenderHelper.renderEnchantedGlint(this, entity, this.modelTrident::render, partialTicks);
         }
 
         if (this.renderOutlines) {
@@ -61,44 +63,6 @@ public class RenderTrident extends Render<EntityTrident> {
         GlStateManager.enableLighting();
     }
 
-    private static final ResourceLocation ENCHANTED_ITEM_GLINT_RES = new ResourceLocation(
-            "textures/misc/enchanted_item_glint.png");
-
-    protected void renderEnchantedGlint(Render<?> render, Entity entityIn, Runnable modelRenderer, double x, double y,
-            double z, float partialTicks) {
-        float f = (float) entityIn.ticksExisted + partialTicks;
-        render.bindTexture(ENCHANTED_ITEM_GLINT_RES);
-        GlStateManager.enableBlend();
-        GlStateManager.depthFunc(514);
-        GlStateManager.depthMask(false);
-        float f1 = 0.5F;
-        GlStateManager.color(0.5F, 0.5F, 0.5F, 1.0F);
-
-        for (int i = 0; i < 2; ++i) {
-            GlStateManager.disableLighting();
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_COLOR, GlStateManager.DestFactor.ONE);
-            float f2 = 0.76F;
-            GlStateManager.color(0.38F, 0.19F, 0.608F, 1.0F);
-            GlStateManager.matrixMode(5890);
-            GlStateManager.loadIdentity();
-            float f3 = 0.33333334F;
-            GlStateManager.scale(0.33333334F, 0.33333334F, 0.33333334F);
-            GlStateManager.rotate(30.0F - (float) i * 60.0F, 0.0F, 0.0F, 1.0F);
-            GlStateManager.translate(0.0F, f * (0.001F + (float) i * 0.003F) * 20.0F, 0.0F);
-            GlStateManager.matrixMode(5888);
-            modelRenderer.run();
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-        }
-
-        GlStateManager.matrixMode(5890);
-        GlStateManager.loadIdentity();
-        GlStateManager.matrixMode(5888);
-        GlStateManager.enableLighting();
-        GlStateManager.depthMask(true);
-        GlStateManager.depthFunc(515);
-        GlStateManager.disableBlend();
-    }
-
     protected void renderLoyaltyBeam(EntityTrident trident, double x, double y, double z, float partialTicks) {
         Entity owner = trident.getShooter();
 
@@ -108,22 +72,22 @@ public class RenderTrident extends Render<EntityTrident> {
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
 
-        double yawRadians = this.lerp(owner.prevRotationYaw, owner.rotationYaw, (partialTicks * 0.5F))
+        double yawRadians = AFMMathHelper.lerp(owner.prevRotationYaw, owner.rotationYaw, (partialTicks * 0.5F))
                 * ((float) Math.PI / 180F);
         double cosYaw = Math.cos(yawRadians);
         double sinYaw = Math.sin(yawRadians);
 
-        double ownerX = this.lerp(owner.prevPosX, owner.posX, partialTicks);
-        double ownerY = this.lerp(owner.prevPosY + (double) owner.getEyeHeight() * 0.8,
+        double ownerX = AFMMathHelper.lerp(owner.prevPosX, owner.posX, partialTicks);
+        double ownerY = AFMMathHelper.lerp(owner.prevPosY + (double) owner.getEyeHeight() * 0.8,
                 owner.posY + (double) owner.getEyeHeight() * 0.8, partialTicks);
-        double ownerZ = this.lerp(owner.prevPosZ, owner.posZ, partialTicks);
+        double ownerZ = AFMMathHelper.lerp(owner.prevPosZ, owner.posZ, partialTicks);
 
         double combinedCosSin = cosYaw - sinYaw;
         double combinedSinCos = sinYaw + cosYaw;
 
-        double tridentX = this.lerp(trident.prevPosX, trident.posX, partialTicks);
-        double tridentY = this.lerp(trident.prevPosY, trident.posY, partialTicks);
-        double tridentZ = this.lerp(trident.prevPosZ, trident.posZ, partialTicks);
+        double tridentX = AFMMathHelper.lerp(trident.prevPosX, trident.posX, partialTicks);
+        double tridentY = AFMMathHelper.lerp(trident.prevPosY, trident.posY, partialTicks);
+        double tridentZ = AFMMathHelper.lerp(trident.prevPosZ, trident.posZ, partialTicks);
 
         double diffX = ownerX - tridentX;
         double diffY = ownerY - tridentY;
@@ -143,7 +107,7 @@ public class RenderTrident extends Render<EntityTrident> {
         int segments = 37;
         int colorShift = 7 - entityTicks % 7;
 
-        for (int i = 0; i <= segments; ++i) {
+        for (int i = 0; i <= segments; i++) {
             double progress = (double) i / (double) segments;
             float colorPulse = 1.0F - ((i + colorShift) % 7) / 7.0F;
             double curve = progress * 2.0D - 1.0D;
@@ -167,7 +131,7 @@ public class RenderTrident extends Render<EntityTrident> {
         tessellator.draw();
 
         bufferbuilder.begin(5, DefaultVertexFormats.POSITION_COLOR);
-        for (int i = 0; i <= segments; ++i) {
+        for (int i = 0; i <= segments; i++) {
             double progress = (double) i / (double) segments;
             float colorPulse = 1.0F - ((i + colorShift) % 7) / 7.0F;
             double curve = progress * 2.0D - 1.0D;
@@ -185,18 +149,13 @@ public class RenderTrident extends Render<EntityTrident> {
             bufferbuilder.pos(vertexX, vertexY, vertexZ).color(r, g, b, 1.0F).endVertex();
             bufferbuilder.pos(vertexX + 0.1D * curve, vertexY, vertexZ + 0.1D * curve).color(r, g, b, 1.0F).endVertex();
 
-            if (i > trident.returningTicks * 2)
-                break;
+            if (i > trident.returningTicks * 2) break;
         }
         tessellator.draw();
 
         GlStateManager.enableLighting();
         GlStateManager.enableTexture2D();
         GlStateManager.enableCull();
-    }
-
-    private double lerp(double start, double end, double pct) {
-        return start + (end - start) * pct;
     }
 
     @Override

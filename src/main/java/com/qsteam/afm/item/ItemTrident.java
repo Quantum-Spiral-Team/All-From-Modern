@@ -97,7 +97,8 @@ public class ItemTrident extends ItemBase implements IItemModel {
                     stack.damageItem(1, player);
                     if (riptideLevel == 0) {
                         EntityTrident trident = new EntityTrident(world, player, stack);
-                        trident.shoot(player, player.rotationPitch, player.rotationYaw, 2.5F, 1.0F);
+                        trident.shoot(player, player.rotationPitch, player.rotationYaw,
+                                2.5F * getTridentVelocity(duration),  1.0F);
                         if (player.capabilities.isCreativeMode) {
                             trident.setPickupStatus(EntityAbstractArrow.PickupStatus.CREATIVE_ONLY);
                         }

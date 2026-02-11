@@ -188,7 +188,25 @@ public abstract class EntityAbstractArrow extends Entity implements IProjectile 
         }
 
         if (this.inGround && !isNoClip) {
-            if (this.inBlockState != blockstate && !this.world.getCollisionBoxes(null, this.getEntityBoundingBox().grow(0.05D)).isEmpty()) {
+            boolean stillInGround = false;
+            AxisAlignedBB aabb = this.getEntityBoundingBox().grow(0.05D);
+
+            for (int x = MathHelper.floor(aabb.minX); x <= MathHelper.floor(aabb.maxX); ++x) {
+                for (int y = MathHelper.floor(aabb.minY); y <= MathHelper.floor(aabb.maxY); ++y) {
+                    for (int z = MathHelper.floor(aabb.minZ); z <= MathHelper.floor(aabb.maxZ); ++z) {
+                        if (this.world.getBlockState(new BlockPos(x, y, z)) == this.inBlockState) {
+                            stillInGround = true;
+                            break;
+                        }
+                    }
+                    if (stillInGround)
+                        break;
+                }
+                if (stillInGround)
+                    break;
+            }
+
+            if (!stillInGround || this.world.getCollisionBoxes(this, aabb).isEmpty()) {
                 this.inGround = false;
                 this.life = 0;
                 this.ticksInAir = 0;
@@ -399,10 +417,10 @@ public abstract class EntityAbstractArrow extends Entity implements IProjectile 
                     this.hitEntities.add(livingEntity);
                 }
 
-//                TODO: Implement KILLED_BY_CROSSBOW trigger
-//                if (!this.world.isRemote && shooter instanceof EntityPlayerMP) {
-//                    EntityPlayerMP serverPlayer = (EntityPlayerMP) shooter;
-//                }
+                // TODO: Implement KILLED_BY_CROSSBOW trigger
+                // if (!this.world.isRemote && shooter instanceof EntityPlayerMP) {
+                // EntityPlayerMP serverPlayer = (EntityPlayerMP) shooter;
+                // }
             }
 
             this.playSound(this.hitSound, 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
@@ -441,7 +459,8 @@ public abstract class EntityAbstractArrow extends Entity implements IProjectile 
         return this.hitSound;
     }
 
-    protected abstract void arrowHit(EntityLivingBase living);
+    protected void arrowHit(EntityLivingBase living) {
+    }
 
     @Nullable
     protected RayTraceResult findEntityOnPath(Vec3d startVec, Vec3d endVec) {
