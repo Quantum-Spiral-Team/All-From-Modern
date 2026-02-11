@@ -6,12 +6,6 @@
         "model": 1
       },
       "model": "afm:item/trident_inventory"
-    },
-    {
-      "predicate": {
-        "model": 2
-      },
-      "model": "afm:item/trident_throwing"
     }
   ]
 }

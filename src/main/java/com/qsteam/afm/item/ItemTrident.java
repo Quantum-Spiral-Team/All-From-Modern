@@ -48,15 +48,10 @@ public class ItemTrident extends ItemBase implements IItemModel {
         this.setMaxStackSize(1);
         this.setMaxDamage(TRIDENT_MATERIAL.getMaxUses());
 
-        this.addPropertyOverride(new ResourceLocation("model"), (stack, worldIn, entityIn) -> {
-            if (entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack) {
-                return 2.0F;
-            }
-            if (stack.hasTagCompound() && stack.getTagCompound().hasKey("Thrown")) {
-                return 0.0F;
-            }
-            return worldIn == null ? 1.0F : 0.0F;
-        });
+        this.addPropertyOverride(new ResourceLocation("model"),
+                (stack, worldIn, entityIn) ->
+                        worldIn == null ? 1.0F : 0.0F
+        );
 
         RegistryHandler.registerItem(this);
     }
@@ -124,7 +119,7 @@ public class ItemTrident extends ItemBase implements IItemModel {
                     float fZ = MathHelper.cos(yaw * ((float) Math.PI / 180F))
                             * MathHelper.cos(pitch * ((float) Math.PI / 180F));
                     float length = MathHelper.sqrt(fX * fX + fY * fY + fZ * fZ);
-                    float force = 3.0F * ((1.0F + (float) riptideLevel) / 4.0F);
+                    float force = 3.0F * ((1.0F + riptideLevel) / 4.0F);
                     fX *= force / length;
                     fY *= force / length;
                     fZ *= force / length;
@@ -182,9 +177,9 @@ public class ItemTrident extends ItemBase implements IItemModel {
         Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
         if (equipmentSlot == EntityEquipmentSlot.MAINHAND) {
             multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER,
-                    "Weapon modifier", (double) TRIDENT_MATERIAL.getAttackDamage(), 0));
+                    "Weapon modifier", TRIDENT_MATERIAL.getAttackDamage(), 0));
             multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(),
-                    new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2.9000000953674316D, 0));
+                    new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2.9D, 0));
         }
         return multimap;
     }

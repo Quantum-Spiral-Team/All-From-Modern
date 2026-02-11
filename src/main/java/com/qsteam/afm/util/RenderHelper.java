@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderHelper {
 
-    private static final ResourceLocation ENCHANTED_ITEM_GLINT_RES = new ResourceLocation("textures/misc/enchanted_item_glint.png");
+    public static final ResourceLocation ENCHANTED_ITEM_GLINT_RES = new ResourceLocation("textures/misc/enchanted_item_glint.png");
 
     public static void renderEnchantedGlint(Render<?> render, Entity entityIn, Runnable modelRenderer, float partialTicks) {
         float f = (float) entityIn.ticksExisted + partialTicks;

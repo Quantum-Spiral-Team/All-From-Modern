@@ -19,24 +19,24 @@ public class MixinModelBiped {
             float headPitch, float scaleFactor, Entity entityIn, CallbackInfo ci) {
         if (entityIn instanceof EntityLivingBase) {
             EntityLivingBase entity = (EntityLivingBase) entityIn;
-            ItemStack itemstack = entity.getHeldItemMainhand();
-            ItemStack itemstack1 = entity.getHeldItemOffhand();
+            ItemStack mainStack = entity.getHeldItemMainhand();
+            ItemStack offStack = entity.getHeldItemOffhand();
 
             ModelBiped model = (ModelBiped) (Object) this;
 
-            if (!itemstack.isEmpty() && itemstack.getItemUseAction() == EnumHandler.SPEAR
+            if (!mainStack.isEmpty() && mainStack.getItemUseAction() == EnumHandler.SPEAR
                     && entity.getItemInUseCount() > 0) {
                 if (entity.getPrimaryHand() == EnumHandSide.RIGHT) {
                     model.bipedRightArm.rotateAngleX = model.bipedRightArm.rotateAngleX * 0.5F
-                            - ((float) Math.PI * 0.6F);
+                            - ((float) Math.PI * 0.9F);
                     model.bipedRightArm.rotateAngleY = 0.0F;
                 } else {
-                    model.bipedLeftArm.rotateAngleX = model.bipedLeftArm.rotateAngleX * 0.5F - ((float) Math.PI * 0.6F);
+                    model.bipedLeftArm.rotateAngleX = model.bipedLeftArm.rotateAngleX * 0.5F - ((float) Math.PI * 0.9F);
                     model.bipedLeftArm.rotateAngleY = 0.0F;
                 }
             }
 
-            if (!itemstack1.isEmpty() && itemstack1.getItemUseAction() == EnumHandler.SPEAR
+            if (!offStack.isEmpty() && offStack.getItemUseAction() == EnumHandler.SPEAR
                     && entity.getItemInUseCount() > 0) {
                 if (entity.getPrimaryHand() == EnumHandSide.RIGHT) {
                     model.bipedLeftArm.rotateAngleX = model.bipedLeftArm.rotateAngleX * 0.5F - ((float) Math.PI * 0.6F);

@@ -1,8 +1,5 @@
 {
-  "textures": {
-    "0": "afm:entity/trident",
-    "particle": "afm:entity/trident"
-  },
+  "parent": "builtin/entity",
   "display": {
     "thirdperson_righthand": {
       "rotation": [0, 25, 0],

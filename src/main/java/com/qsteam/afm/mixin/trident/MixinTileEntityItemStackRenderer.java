@@ -1,8 +1,10 @@
 package com.qsteam.afm.mixin.trident;
 
+import com.qsteam.afm.AllFromModern;
 import com.qsteam.afm.Tags;
 import com.qsteam.afm.client.model.ModelTrident;
 import com.qsteam.afm.item.ItemTrident;
+import com.qsteam.afm.util.RenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -21,34 +23,37 @@ public class MixinTileEntityItemStackRenderer {
 
     @Unique private static final ModelTrident MODEL_TRIDENT = new ModelTrident();
     @Unique private static final ResourceLocation TRIDENT_TEXTURE = new ResourceLocation(Tags.MOD_ID, "textures/entity/trident.png");
-    @Unique private static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
 
-    @Inject(method = "renderByItem(Lnet/minecraft/item/ItemStack;F)V",
-            at = @At("HEAD"))
+    @Inject(
+            method = "renderByItem(Lnet/minecraft/item/ItemStack;F)V",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void afterItemInit(ItemStack itemStackIn, float partialTicks, CallbackInfo ci) {
         if (itemStackIn.getItem() instanceof ItemTrident) {
             Minecraft.getMinecraft().getTextureManager().bindTexture(TRIDENT_TEXTURE);
 
             GlStateManager.pushMatrix();
+            GlStateManager.translate(0.5F, 0.5F, 0.5F);
             GlStateManager.scale(1.0f, -1.0f, -1.0f);
             MODEL_TRIDENT.render();
 
             if (itemStackIn.hasEffect()) {
-                GlStateManager.color(0.5019608F, 0.2509804F, 0.8F);
-                Minecraft.getMinecraft().getTextureManager().bindTexture(RES_ITEM_GLINT);
                 renderEffect(Minecraft.getMinecraft().getTextureManager(), MODEL_TRIDENT::render);
             }
             GlStateManager.popMatrix();
+            ci.cancel();
         }
     }
 
     @Unique
     private static void renderEffect(TextureManager manager, Runnable runnable) {
+        GlStateManager.color(0.5019608F, 0.2509804F, 0.8F);
         GlStateManager.depthMask(false);
         GlStateManager.depthFunc(514);
         GlStateManager.disableLighting();
         GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_COLOR, GlStateManager.DestFactor.ONE);
-        manager.bindTexture(RES_ITEM_GLINT);
+        manager.bindTexture((RenderHelper.ENCHANTED_ITEM_GLINT_RES));
         GlStateManager.matrixMode(5890);
         GlStateManager.pushMatrix();
         GlStateManager.scale(1,1,1);
