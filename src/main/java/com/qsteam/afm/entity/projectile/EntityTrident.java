@@ -114,7 +114,6 @@ public class EntityTrident extends EntityAbstractArrow {
     @Override
     public ItemStack getArrowStack() {
         ItemStack stack = this.thrownStack.copy();
-        this.setThrown(stack, true);
         return this.thrownStack.copy();
     }
 
@@ -211,17 +210,6 @@ public class EntityTrident extends EntityAbstractArrow {
         return true;
     }
 
-    public void setThrown(ItemStack stack, boolean bool) {
-        NBTTagCompound nbt = stack.getTagCompound() != null ? stack.getTagCompound() : new NBTTagCompound();
-
-        if (nbt.hasKey("Thrown") && bool) {
-            nbt.removeTag("Thrown");
-        } else {
-            nbt.setInteger("Thrown", 1);
-        }
-        stack.setTagCompound(nbt);
-    }
-
     @Override
     public void onCollideWithPlayer(EntityPlayer entityIn) {
         if (!this.world.isRemote && (this.inGround || this.isNoClip()) && this.arrowShake <= 0) {
@@ -236,7 +224,6 @@ public class EntityTrident extends EntityAbstractArrow {
 
             if (flag) {
                 ItemStack pickupStack = this.thrownStack.copy();
-                this.setThrown(pickupStack, true); // Reset thrown state on the stack we are giving
 
                 if (this.getPickupStatus() == PickupStatus.ALLOWED
                         && !entityIn.inventory.addItemStackToInventory(pickupStack)) {
