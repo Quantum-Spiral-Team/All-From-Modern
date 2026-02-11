@@ -77,8 +77,9 @@ dependencies {
     implementation ("com.cleanroommc:modularui:3.0.6") {transitive = false}
     implementation ("com.cleanroommc:groovyscript:1.3.3") {transitive = false}
     implementation rfg.deobf("curse.maven:nether-api-1306115:7216794")
-    implementation rfg.deobf("curse.maven:the-one-probe-245211:2667280")
     implementation rfg.deobf("curse.maven:top-addons-247111:2887479")
+    runtimeOnly rfg.deobf("curse.maven:theonesmeagle-977883:7095096")
+
 
     // fix lightning bugs in dev
     runtimeOnly rfg.deobf(files(
